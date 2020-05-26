@@ -1,0 +1,182 @@
+# *** Placeholder settings ***
+# Shows the number of 'members joined / max members' in a lobby
+MembersJoinedPlaceholder: '{membersjoined}'
+# Lists the name of the players who joined a lobby
+AcitveMembersNamesPlaceholder: '{playersinlobby}'
+# Shows the ID of the lobby, i.e '#3'
+LobbyIDPlaceholder: '{lobbyid}'
+# Shows the given run's name
+RunNamePlaceholder: '{runname}'
+# Shows the given run's point name
+RunPointsNamePlaceholder: '{runpointsname}'
+# Shows the points you get when you finish the given run
+RunPointsAmountPlaceholder: '{runpointsamount}'
+# Shows the price (the number of points) it costs to buy an item in shop
+ItemPricePlaceholder: '{price}'
+# Shows the leftover time of the given run in minutes
+LeftOverMinutesPlaceholder: '{leftovertime}'
+# Shows the set displayname of the current shop
+ShopNamePlaceholder: '{shopname}'
+
+
+# *** Shop Options ***
+DemonRunShop:
+  HookThisRun: 'DemonRun'
+  DisplayName: '§cDémon run shop'
+  NPCname: 'Gandolor'
+  ShopGUIopenPersmission: 'demonrun.canshop'
+  PriceLore:
+    - '§r§c---------------------'
+    - '§r§c{price} {runpointsname}s'
+  Items:
+#AnotherRunShopName:
+#AnotherRunShopName:
+#AnotherRunShopName:
+
+
+# *** Run Options ***
+DemonRun:
+  name: '&eDémon run'
+  ThisRunPointsName: 'Démon Point'
+  ThisRunPointsAmount: 2
+  ThisRunNPCstartName: 'Demon Guard'
+  PlayGUIopenPermission: 'demonrun.canplay'
+  NumberOfAvailableRuns: 3
+  WoolNameWhenCanJoin: '{lobbyid} §eJoin this run'
+  WoolNameWhenCanNotJoin: '{lobbyid} §cThis run ends in {leftovertime} mins'
+  WoolLore:
+    - 'There are {membersjoined} players in this lobby.'
+    - '&bPlayers:'
+    - '{playersinlobby}'
+    - 'You get {runpointsamount} {runpointsname}s if you finish this run'
+  PlayTimeInMinutes: 20
+  BossBarTitle: '{runname} - You have {leftovertime} mins left'
+  #The number of runs below and the NumberOfAvailableRuns above must be the same.
+  RunProcessInformation:
+    1:
+      level_0:
+        WorldNameCheckPoint: 'DemonWorld1'
+        CheckPointLocation: 235 64 -129
+        NPCname: 'Auror'
+        KeyItemDisplayName: 'StoneKey'
+        WorldNameTeleport: 'DemonWorld1'
+        TeleportToLocation: 266 50 -100
+        FinalLevel: false
+      level_1:
+        WorldNameCheckPoint: 'DemonWorld1'
+        CheckPointLocation: 266 50 -100
+        NPCname: 'Euror'
+        KeyItemDisplayName: 'GoldKey'
+        WorldNameTeleport: 'DemonWorld1'
+        TeleportToLocation: 290 55 -70
+        FinalLevel: false
+      level_3:
+        WorldNameCheckPoint: 'DemonWorld1'
+        CheckPointLocation: 290 55 -70
+        NPCname: 'Geuror'
+        KeyItemDisplayName: 'DiamondKey'
+        WorldNameTeleport: 'DemonWorld1'
+        TeleportToLocation: 310 55 -50
+        FinalLevel: false
+      level_4:
+        WorldNameCheckPoint: 'DemonWorld1'
+        CheckPointLocation: 310 55 -50
+        NPCname: 'Feuror'
+        KeyItemDisplayName: 'EmeraldKey'
+        WorldNameTeleport: 'StartWorld'
+        TeleportToLocation: 200 6 200
+        FinalLevel: true
+    2:
+      level_0:
+        WorldNameCheckPoint: 'DemonWorld2'
+        CheckPointLocation: 235 64 -129
+        NPCname: 'Auror'
+        KeyItemDisplayName: 'StoneKey'
+        WorldNameTeleport: 'DemonWorld2'
+        TeleportToLocation: 266 50 -100
+        FinalLevel: false
+      level_1:
+        WorldNameCheckPoint: 'DemonWorld2'
+        CheckPointLocation: 266 50 -100
+        NPCname: 'Euror'
+        KeyItemDisplayName: 'GoldKey'
+        WorldNameTeleport: 'DemonWorld2'
+        TeleportToLocation: 290 55 -70
+        FinalLevel: false
+      level_3:
+        WorldNameCheckPoint: 'DemonWorld2'
+        CheckPointLocation: 290 55 -70
+        NPCname: 'Geuror'
+        KeyItemDisplayName: 'DiamondKey'
+        WorldNameTeleport: 'DemonWorld2'
+        TeleportToLocation: 310 55 -50
+        FinalLevel: false
+      level_4:
+        WorldNameCheckPoint: 'DemonWorld2'
+        CheckPointLocation: 310 55 -50
+        NPCname: 'Feuror'
+        KeyItemDisplayName: 'EmeraldKey'
+        WorldNameTeleport: 'StartWorld'
+        TeleportToLocation: 200 6 200
+        FinalLevel: true
+    3:
+      level_0:
+        WorldNameCheckPoint: 'DemonWorld3'
+        CheckPointLocation: 235 64 -129
+        NPCname: 'Auror'
+        KeyItemDisplayName: 'StoneKey'
+        WorldNameTeleport: 'DemonWorld3'
+        TeleportToLocation: 266 50 -100
+        FinalLevel: false
+      level_1:
+        WorldNameCheckPoint: 'DemonWorld3'
+        CheckPointLocation: 266 50 -100
+        NPCname: 'Euror'
+        KeyItemDisplayName: 'GoldKey'
+        WorldNameTeleport: 'DemonWorld3'
+        TeleportToLocation: 290 55 -70
+        FinalLevel: false
+      level_3:
+        WorldNameCheckPoint: 'DemonWorld3'
+        CheckPointLocation: 290 55 -70
+        NPCname: 'Geuror'
+        KeyItemDisplayName: 'DiamondKey'
+        WorldNameTeleport: 'DemonWorld3'
+        TeleportToLocation: 310 55 -50
+        FinalLevel: false
+      level_4:
+        WorldNameCheckPoint: 'DemonWorld3'
+        CheckPointLocation: 310 55 -50
+        NPCname: 'Feuror'
+        KeyItemDisplayName: 'EmeraldKey'
+        WorldNameTeleport: 'StartWorld'
+        TeleportToLocation: 200 6 200
+        FinalLevel: true
+
+#AnotherRunName:
+#AnotherRunName:
+#AnotherRunName:
+
+
+# *** Message Settings ***
+CanNotOpenRunGUImsg: "Sorry, but you aren't allowed to play this run yet."
+CanNotOpenShopGUImsg: "Sorry, but you can't shop here yet."
+RunStartMsg: 'The lobby is full! The run starts in 10 seconds.'
+PassedLevelMsg: 'You handed the key over. Your team is being teleported to the next level.'
+RunFinishMsg: 'You successfully defeated the final boss and completed the run. You earned {runpointsamount} {runpointsname}s.'
+ShopNotEnoughPointsMsg: "You don't have enough points to buy this item."
+ShopBoughtSuccessfullyMsg: 'You successfully bought this item.'
+# When someone uses the '/mobrun info' command:
+DisplayRunPointsMsg: 'You currently have the following amount of runpoints:'
+CouldNotFinishInTimeMsg: "You didn't finish the game in time. You have been teleported out."
+BackInGameMsg: 'You came back and the run is still on, you got teleported to the last checkpoint.'
+# The players get these messages when they were in a run, but a server shutdown occured and the run finished automatically, and on next join they are at the run's starting NPC.
+AfterShutDown1Msg: 'The server has been down, therefore the run is over. You lost your progress.'
+AfterShutDown2Msg: "If the shutdown wasn't planned and broadcasted in time, contact the admins. Otherwise, we can't do anything. Sorry."
+# When someone tries to use any form of teleport during run, even if the player is an OP
+CanNotLeaveMsg: 'Sorry, but you cannot leave your group while you are in a run. Please, finish the run first.'
+# Admin command related feedbacks:
+MobrunShopCreateCommandSuccessMsg: 'You successfully created a shop in the config. Please go to the config file and edit the rest.'
+MobrunShopCreateCommandFailureMsg: 'A shop with this name already exists.'
+MobrunShopAddCommandSuccessMsg: 'You successfully copied the data of the item in your hand to {shopname} with the price set to {price}.'
+MobrunShopAddCommandFailureMsg: 'You cannot add any items to that shop, because the config is invalid.'

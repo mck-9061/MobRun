@@ -1,0 +1,10 @@
+name: MobRun
+version: 1.0
+author: MCK
+api-version: 1.12
+main: me.therealmck.mobrun.Main
+depend:
+  - Citizens
+commands:
+  mobrun:
+    
