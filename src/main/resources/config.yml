@@ -3,7 +3,7 @@
 MembersJoinedPlaceholder: '{membersjoined}'
 # Lists the name of the players who joined a lobby
 AcitveMembersNamesPlaceholder: '{playersinlobby}'
-# Shows the ID of the lobby, i.e '#3'
+# Shows the ID of the lobby, i.e '3'
 LobbyIDPlaceholder: '{lobbyid}'
 # Shows the given run's name
 RunNamePlaceholder: '{runname}'
@@ -24,7 +24,7 @@ DemonRunShop:
   HookThisRun: 'DemonRun'
   DisplayName: '§cDémon run shop'
   NPCname: 'Gandolor'
-  ShopGUIopenPersmission: 'demonrun.canshop'
+  ShopGUIopenPermission: 'demonrun.canshop'
   PriceLore:
     - '§r§c---------------------'
     - '§r§c{price} {runpointsname}s'
@@ -42,8 +42,8 @@ DemonRun:
   ThisRunNPCstartName: 'Demon Guard'
   PlayGUIopenPermission: 'demonrun.canplay'
   NumberOfAvailableRuns: 3
-  WoolNameWhenCanJoin: '{lobbyid} §eJoin this run'
-  WoolNameWhenCanNotJoin: '{lobbyid} §cThis run ends in {leftovertime} mins'
+  WoolNameWhenCanJoin: '#{lobbyid} §eJoin this run'
+  WoolNameWhenCanNotJoin: '#{lobbyid} §cThis run ends in {leftovertime} mins'
   WoolLore:
     - 'There are {membersjoined} players in this lobby.'
     - '&bPlayers:'
@@ -56,101 +56,101 @@ DemonRun:
     1:
       level_0:
         WorldNameCheckPoint: 'DemonWorld1'
-        CheckPointLocation: 235 64 -129
+        CheckPointLocation: '235 64 -129'
         NPCname: 'Auror'
         KeyItemDisplayName: 'StoneKey'
         WorldNameTeleport: 'DemonWorld1'
-        TeleportToLocation: 266 50 -100
+        TeleportToLocation: '266 50 -100'
         FinalLevel: false
       level_1:
         WorldNameCheckPoint: 'DemonWorld1'
-        CheckPointLocation: 266 50 -100
+        CheckPointLocation: '266 50 -100'
         NPCname: 'Euror'
         KeyItemDisplayName: 'GoldKey'
         WorldNameTeleport: 'DemonWorld1'
-        TeleportToLocation: 290 55 -70
+        TeleportToLocation: '290 55 -70'
         FinalLevel: false
       level_3:
         WorldNameCheckPoint: 'DemonWorld1'
-        CheckPointLocation: 290 55 -70
+        CheckPointLocation: '290 55 -70'
         NPCname: 'Geuror'
         KeyItemDisplayName: 'DiamondKey'
         WorldNameTeleport: 'DemonWorld1'
-        TeleportToLocation: 310 55 -50
+        TeleportToLocation: '310 55 -50'
         FinalLevel: false
       level_4:
         WorldNameCheckPoint: 'DemonWorld1'
-        CheckPointLocation: 310 55 -50
+        CheckPointLocation: '310 55 -50'
         NPCname: 'Feuror'
         KeyItemDisplayName: 'EmeraldKey'
         WorldNameTeleport: 'StartWorld'
-        TeleportToLocation: 200 6 200
+        TeleportToLocation: '200 6 200'
         FinalLevel: true
     2:
       level_0:
         WorldNameCheckPoint: 'DemonWorld2'
-        CheckPointLocation: 235 64 -129
+        CheckPointLocation: '235 64 -129'
         NPCname: 'Auror'
         KeyItemDisplayName: 'StoneKey'
         WorldNameTeleport: 'DemonWorld2'
-        TeleportToLocation: 266 50 -100
+        TeleportToLocation: '266 50 -100'
         FinalLevel: false
       level_1:
         WorldNameCheckPoint: 'DemonWorld2'
-        CheckPointLocation: 266 50 -100
+        CheckPointLocation: '266 50 -100'
         NPCname: 'Euror'
         KeyItemDisplayName: 'GoldKey'
         WorldNameTeleport: 'DemonWorld2'
-        TeleportToLocation: 290 55 -70
+        TeleportToLocation: '290 55 -70'
         FinalLevel: false
       level_3:
         WorldNameCheckPoint: 'DemonWorld2'
-        CheckPointLocation: 290 55 -70
+        CheckPointLocation: '290 55 -70'
         NPCname: 'Geuror'
         KeyItemDisplayName: 'DiamondKey'
         WorldNameTeleport: 'DemonWorld2'
-        TeleportToLocation: 310 55 -50
+        TeleportToLocation: '310 55 -50'
         FinalLevel: false
       level_4:
         WorldNameCheckPoint: 'DemonWorld2'
-        CheckPointLocation: 310 55 -50
+        CheckPointLocation: '310 55 -50'
         NPCname: 'Feuror'
         KeyItemDisplayName: 'EmeraldKey'
         WorldNameTeleport: 'StartWorld'
-        TeleportToLocation: 200 6 200
+        TeleportToLocation: '200 6 200'
         FinalLevel: true
     3:
       level_0:
         WorldNameCheckPoint: 'DemonWorld3'
-        CheckPointLocation: 235 64 -129
+        CheckPointLocation: '235 64 -129'
         NPCname: 'Auror'
         KeyItemDisplayName: 'StoneKey'
         WorldNameTeleport: 'DemonWorld3'
-        TeleportToLocation: 266 50 -100
+        TeleportToLocation: '266 50 -100'
         FinalLevel: false
       level_1:
         WorldNameCheckPoint: 'DemonWorld3'
-        CheckPointLocation: 266 50 -100
+        CheckPointLocation: '266 50 -100'
         NPCname: 'Euror'
         KeyItemDisplayName: 'GoldKey'
         WorldNameTeleport: 'DemonWorld3'
-        TeleportToLocation: 290 55 -70
+        TeleportToLocation: '290 55 -70'
         FinalLevel: false
       level_3:
         WorldNameCheckPoint: 'DemonWorld3'
-        CheckPointLocation: 290 55 -70
+        CheckPointLocation: '290 55 -70'
         NPCname: 'Geuror'
         KeyItemDisplayName: 'DiamondKey'
         WorldNameTeleport: 'DemonWorld3'
-        TeleportToLocation: 310 55 -50
+        TeleportToLocation: '310 55 -50'
         FinalLevel: false
       level_4:
         WorldNameCheckPoint: 'DemonWorld3'
-        CheckPointLocation: 310 55 -50
+        CheckPointLocation: '310 55 -50'
         NPCname: 'Feuror'
         KeyItemDisplayName: 'EmeraldKey'
         WorldNameTeleport: 'StartWorld'
-        TeleportToLocation: 200 6 200
+        TeleportToLocation: '200 6 200'
         FinalLevel: true
 
 #AnotherRunName:
