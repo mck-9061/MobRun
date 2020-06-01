@@ -20,18 +20,19 @@ ShopNamePlaceholder: '{shopname}'
 
 
 # *** Shop Options ***
-DemonRunShop:
-  HookThisRun: 'DemonRun'
-  DisplayName: '§cDémon run shop'
-  NPCname: 'Gandolor'
-  ShopGUIopenPermission: 'demonrun.canshop'
-  PriceLore:
-    - '§r§c---------------------'
-    - '§r§c{price} {runpointsname}s'
-  Items:
-#AnotherRunShopName:
-#AnotherRunShopName:
-#AnotherRunShopName:
+Shops:
+  DemonRunShop:
+    HookThisRun: 'DemonRun'
+    DisplayName: '§cDémon run shop'
+    NPCname: 'Gandolor'
+    ShopGUIopenPermission: 'demonrun.canshop'
+    PriceLore:
+      - '§r§c---------------------'
+      - '§r§c{price} {runpointsname}s'
+    Items:
+  #AnotherRunShopName:
+  #AnotherRunShopName:
+  #AnotherRunShopName:
 
 
 # *** Run Options ***
