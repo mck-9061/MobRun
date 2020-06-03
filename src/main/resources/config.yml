@@ -162,6 +162,7 @@ DemonRun:
 # *** Message Settings ***
 CanNotOpenRunGUImsg: "Sorry, but you aren't allowed to play this run yet."
 CanNotOpenShopGUImsg: "Sorry, but you can't shop here yet."
+LobbyFullMsg: 'This lobby is full. Please wait for it to finish.'
 RunStartMsg: 'The lobby is full! The run starts in 10 seconds.'
 PassedLevelMsg: 'You handed the key over. Your team is being teleported to the next level.'
 RunFinishMsg: 'You successfully defeated the final boss and completed the run. You earned {runpointsamount} {runpointsname}s.'

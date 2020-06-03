@@ -8,6 +8,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -21,6 +22,7 @@ public class Main extends JavaPlugin {
     public static FileConfiguration mobrunConfig;
     public static File playerFile;
     public static FileConfiguration playerConfig;
+    public static Plugin instance;
 
     // These fields just store all active stuff, hence why it's a terrible idea to hot-reload
     public static List<Run> activeRuns;
@@ -28,6 +30,7 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        instance = this;
         createMobrunConfig();
         createPlayerConfig();
 

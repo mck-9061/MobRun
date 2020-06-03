@@ -1,5 +1,6 @@
 package me.therealmck.mobrun.utils;
 
+import me.therealmck.mobrun.Main;
 import me.therealmck.mobrun.stuff.Lobby;
 import me.therealmck.mobrun.stuff.Run;
 import me.therealmck.mobrun.stuff.Shop;
@@ -38,6 +39,15 @@ public class Utils {
     }
 
     public ItemStack newItemWithNameAndLore(Material material, int amount, String name, List<String> lore, short colour) {
+        ItemStack item = new ItemStack(material, amount, colour);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(name);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        return item;
+    }
+
+    public ItemStack newItemWithNameAndLoreNoColour(Material material, int amount, String name, List<String> lore) {
         ItemStack item = new ItemStack(material, amount);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(name);

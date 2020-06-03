@@ -32,6 +32,8 @@ public class Lobby {
         this.players.add(player);
     }
 
+    public void removePlayer(Player player) { this.players.remove(player); }
+
     public void setCurrentLevel(Level level) {
         this.currentLevel = level;
     }

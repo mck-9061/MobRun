@@ -7,6 +7,7 @@ public class MessageHelper {
 
     private String cannotOpenRunGui;
     private String cannotOpenShopGui;
+    private String lobbyFullMsg;
     private String runStart;
     private String passedLevel;
     private String runFinish;
@@ -28,6 +29,7 @@ public class MessageHelper {
 
         this.cannotOpenRunGui = config.getString("CanNotOpenRunGuiMsg");
         this.cannotOpenShopGui = config.getString("CanNotOpenShopGuiMsg");
+        this.lobbyFullMsg = config.getString("LobbyFullMsg");
         this.runStart = config.getString("RunStartMsg");
         this.passedLevel = config.getString("PassedLevelMsg");
         this.runFinish = config.getString("RunFinishMsg");
@@ -112,4 +114,6 @@ public class MessageHelper {
     public String getAddItemToShopInvalid() {
         return addItemToShopInvalid;
     }
+
+    public String getLobbyFull() { return lobbyFullMsg; }
 }

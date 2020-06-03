@@ -35,6 +35,7 @@ public class RunNPCClickListener implements Listener {
                     int count = 0;
 
                     for (SubRun subRun : subRuns) {
+                        // TODO: Placeholders
                         if (subRun.getLobby().isRunning()) {
                             gui.setItem(count, utils.newItemWithNameAndLore(Material.CONCRETE, 1, run.getClosedWoolName(), run.getWoolLore(), (short) 14));
                         } else {
