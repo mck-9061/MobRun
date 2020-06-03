@@ -2,7 +2,7 @@
 # Shows the number of 'members joined / max members' in a lobby
 MembersJoinedPlaceholder: '{membersjoined}'
 # Lists the name of the players who joined a lobby
-AcitveMembersNamesPlaceholder: '{playersinlobby}'
+ActiveMembersNamesPlaceholder: '{playersinlobby}'
 # Shows the ID of the lobby, i.e '3'
 LobbyIDPlaceholder: '{lobbyid}'
 # Shows the given run's name
@@ -37,7 +37,7 @@ Shops:
 
 # *** Run Options ***
 DemonRun:
-  name: '&eDémon run'
+  name: '§eDémon run'
   ThisRunPointsName: 'Démon Point'
   ThisRunPointsAmount: 2
   ThisRunNPCstartName: 'Demon Guard'
@@ -47,7 +47,7 @@ DemonRun:
   WoolNameWhenCanNotJoin: '#{lobbyid} §cThis run ends in {leftovertime} mins'
   WoolLore:
     - 'There are {membersjoined} players in this lobby.'
-    - '&bPlayers:'
+    - '§bPlayers:'
     - '{playersinlobby}'
     - 'You get {runpointsamount} {runpointsname}s if you finish this run'
   PlayTimeInMinutes: 20

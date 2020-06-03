@@ -10,11 +10,13 @@ public class SubRun {
     private String id;
     private Run run;
     private List<Level> levels;
+    private Lobby lobby;
 
     public SubRun(String id, Run run, FileConfiguration config) {
         this.id = id;
         this.run = run;
         this.levels = new ArrayList<>();
+        this.lobby = new Lobby(this);
 
         ConfigurationSection section = config.getConfigurationSection(run.getId()+".RunProcessInformation."+id);
 
@@ -34,4 +36,6 @@ public class SubRun {
     public List<Level> getLevels() {
         return levels;
     }
+
+    public Lobby getLobby() { return lobby; }
 }
