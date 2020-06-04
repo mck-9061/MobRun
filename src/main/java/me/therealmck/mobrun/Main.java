@@ -4,10 +4,14 @@ import me.therealmck.mobrun.stuff.Lobby;
 import me.therealmck.mobrun.stuff.Run;
 import me.therealmck.mobrun.stuff.Shop;
 import me.therealmck.mobrun.stuff.SubRun;
+import net.citizensnpcs.Citizens;
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -22,6 +26,8 @@ public class Main extends JavaPlugin {
     public static FileConfiguration mobrunConfig;
     public static File playerFile;
     public static FileConfiguration playerConfig;
+    public static File dataFile;
+    public static FileConfiguration dataConfig;
     public static Plugin instance;
 
     // These fields just store all active stuff, hence why it's a terrible idea to hot-reload
@@ -33,6 +39,7 @@ public class Main extends JavaPlugin {
         instance = this;
         createMobrunConfig();
         createPlayerConfig();
+        createDataConfig();
 
         // Add all runs/shops etc. from config
         List<String> runs = new ArrayList<>();
@@ -59,7 +66,20 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        // Save players that should be notified
 
+        for (Run run : activeRuns) {
+            for (SubRun subRun : run.getAvailableRuns()) {
+                for (Player p : subRun.getLobby().getPlayers()) {
+                    for (NPC npc : CitizensAPI.getNPCRegistry()) {
+                        if (npc.getName().equals(run.getNpcName())) {
+                            dataConfig.set(p.getUniqueId()+".loc", npc.getStoredLocation().serialize());
+                            saveDataConfig();
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public static FileConfiguration getMobrunConfig() {
@@ -110,6 +130,32 @@ public class Main extends JavaPlugin {
     public static void savePlayerConfig() {
         try {
             playerConfig.save(playerFile);
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+
+    public static FileConfiguration getDataConfig() {
+        return dataConfig;
+    }
+
+    private void createDataConfig() {
+        dataFile = new File(getDataFolder(), "data.yml");
+        if (!dataFile.exists()) {
+            dataFile.getParentFile().mkdirs();
+            saveResource("data.yml", false);
+        }
+
+        dataConfig = new YamlConfiguration();
+        try {
+            dataConfig.load(dataFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveDataConfig() {
+        try {
+            dataConfig.save(dataFile);
         } catch (Exception e) {e.printStackTrace();}
     }
 }

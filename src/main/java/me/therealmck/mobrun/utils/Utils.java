@@ -1,11 +1,13 @@
 package me.therealmck.mobrun.utils;
 
+import jdk.internal.jline.internal.Nullable;
 import me.therealmck.mobrun.Main;
 import me.therealmck.mobrun.stuff.Lobby;
 import me.therealmck.mobrun.stuff.Run;
 import me.therealmck.mobrun.stuff.Shop;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -26,16 +28,38 @@ public class Utils {
 
     public String replaceLobbyPlaceholders(String string, Lobby lobby, FileConfiguration config) {
         String toReplace = string;
+        toReplace = toReplace.replace(config.getString("MembersJoinedPlaceholder"), String.valueOf(lobby.getPlayers().size()));
 
+        // Players in a lobby
+        List<Player> players = lobby.getPlayers();
+        String finalString = "";
+
+        for (Player player : players) {
+            finalString += player.getName() + ", ";
+            finalString = finalString.substring(0, finalString.length() - 2);
+        }
+
+        toReplace = toReplace.replace(config.getString("ActiveMembersNamesPlaceholder"), finalString);
+        toReplace = toReplace.replace(config.getString("LobbyIDPlaceholder"), lobby.getSubRun().getId());
+        toReplace = toReplace.replace(config.getString("LeftOverMinutesPlaceholder"), String.valueOf((lobby.getSecondsLeft()/60)+1));
 
         return toReplace;
     }
 
-    public String replaceShopPlaceholders(String string, Shop shop, FileConfiguration config) {
+    public String replaceShopPlaceholders(String string, Shop shop, FileConfiguration config, ItemStack originalItem) {
         String toReplace = string;
 
+        toReplace = toReplace.replace(config.getString("ItemPricePlaceholder"), String.valueOf(shop.getItems().get(originalItem)));
+        toReplace = toReplace.replace(config.getString("ShopNamePlaceholder"), shop.getDisplayName());
 
         return toReplace;
+    }
+
+    public String replaceRunAndLobbyPlaceholders(String string, Run run, Lobby lobby) {
+        String s = string;
+        s = replaceRunPlaceholders(s, run, Main.getMobrunConfig());
+        s = replaceLobbyPlaceholders(s, lobby, Main.getMobrunConfig());
+        return s;
     }
 
     public ItemStack newItemWithNameAndLore(Material material, int amount, String name, List<String> lore, short colour) {

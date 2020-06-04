@@ -14,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RunNPCClickListener implements Listener {
@@ -35,18 +36,26 @@ public class RunNPCClickListener implements Listener {
                     int count = 0;
 
                     for (SubRun subRun : subRuns) {
-                        // TODO: Placeholders
+                        // Replace every line in lore
+                        List<String> finalLore = new ArrayList<>();
+                        finalLore.addAll(run.getWoolLore());
+                        for (String s : finalLore) {
+                            finalLore.remove(s);
+                            s = utils.replaceRunAndLobbyPlaceholders(s, run, subRun.getLobby());
+                            finalLore.add(s);
+                        }
+
                         if (subRun.getLobby().isRunning()) {
-                            gui.setItem(count, utils.newItemWithNameAndLore(Material.CONCRETE, 1, run.getClosedWoolName(), run.getWoolLore(), (short) 14));
+                            gui.setItem(count, utils.newItemWithNameAndLore(Material.CONCRETE, 1, utils.replaceRunAndLobbyPlaceholders(run.getClosedWoolName(), run, subRun.getLobby()), finalLore, (short) 14));
                         } else {
-                            gui.setItem(count, utils.newItemWithNameAndLore(Material.CONCRETE, 1, run.getAvailableWoolName(), run.getWoolLore(), (short) 13));
+                            gui.setItem(count, utils.newItemWithNameAndLore(Material.CONCRETE, 1, utils.replaceRunAndLobbyPlaceholders(run.getAvailableWoolName(), run, subRun.getLobby()), finalLore, (short) 13));
                         }
                         count++;
                     }
 
                     event.getClicker().openInventory(gui);
                 } else {
-                    event.getClicker().sendMessage(lang.getCannotOpenRunGui());
+                    event.getClicker().sendMessage(utils.replaceRunPlaceholders(lang.getCannotOpenRunGui(), run, Main.getMobrunConfig()));
                 }
             }
         }

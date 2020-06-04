@@ -9,10 +9,13 @@ public class Lobby {
     private final SubRun subRun;
     private Level currentLevel;
     private boolean isRunning;
+    private int secondsLeft;
 
     public Lobby(SubRun subRun) {
         this.subRun = subRun;
         this.isRunning = false;
+        this.secondsLeft = 0;
+        this.currentLevel = subRun.getLevels().get(0);
     }
 
     public List<Player> getPlayers() {
@@ -45,10 +48,19 @@ public class Lobby {
 
     public void stopRunning() {
         this.isRunning = false;
+        this.players.clear();
     }
 
 
     public boolean isRunning() {
         return isRunning;
+    }
+
+    public int getSecondsLeft() {
+        return secondsLeft;
+    }
+
+    public void setSecondsLeft(int secondsLeft) {
+        this.secondsLeft = secondsLeft;
     }
 }

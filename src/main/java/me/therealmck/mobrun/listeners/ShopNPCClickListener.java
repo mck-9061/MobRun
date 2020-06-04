@@ -37,16 +37,32 @@ public class ShopNPCClickListener implements Listener {
 
                     for (ItemStack item : items.keySet()) {
                         ItemMeta meta = item.getItemMeta();
+                        ItemStack original = item;
+                        item = item.clone();
+
                         if (meta.hasLore()) {
                             List<String> lore = meta.getLore();
-                            // TODO: Placeholders
                             lore.addAll(shop.getItemLore());
+
+                            for (String s : lore) {
+                                lore.remove(s);
+                                s = utils.replaceShopPlaceholders(s, shop, Main.getMobrunConfig(), original);
+                                lore.add(s);
+                            }
+
                             meta.setLore(lore);
                         } else {
                             List<String> lore = shop.getItemLore();
+
+                            for (String s : lore) {
+                                lore.remove(s);
+                                s = utils.replaceShopPlaceholders(s, shop, Main.getMobrunConfig(), original);
+                                lore.add(s);
+                            }
+
                             meta.setLore(lore);
                         }
-                        item = item.clone();
+
                         item.setItemMeta(meta);
                         gui.setItem(count, item);
                         count++;

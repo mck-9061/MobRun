@@ -1,22 +1,38 @@
 # *** Placeholder settings ***
-# Shows the number of 'members joined / max members' in a lobby
-MembersJoinedPlaceholder: '{membersjoined}'
-# Lists the name of the players who joined a lobby
-ActiveMembersNamesPlaceholder: '{playersinlobby}'
-# Shows the ID of the lobby, i.e '3'
-LobbyIDPlaceholder: '{lobbyid}'
+
+# Please note that placeholders may not work in certain messages where it's impossible to find what it has to refer to.
+# For example, you can't use the lobby ID placeholder in a shop message.
+
+
+# Run placeholders
+
 # Shows the given run's name
 RunNamePlaceholder: '{runname}'
 # Shows the given run's point name
 RunPointsNamePlaceholder: '{runpointsname}'
 # Shows the points you get when you finish the given run
 RunPointsAmountPlaceholder: '{runpointsamount}'
+
+
+# Shop placeholders
+
 # Shows the price (the number of points) it costs to buy an item in shop
 ItemPricePlaceholder: '{price}'
-# Shows the leftover time of the given run in minutes
-LeftOverMinutesPlaceholder: '{leftovertime}'
 # Shows the set displayname of the current shop
 ShopNamePlaceholder: '{shopname}'
+
+
+# Lobby placeholders
+
+# Shows the number of 'members joined / max members' in a lobby
+MembersJoinedPlaceholder: '{membersjoined}'
+# Lists the name of the players who joined a lobby
+ActiveMembersNamesPlaceholder: '{playersinlobby}'
+# Shows the ID of the lobby, i.e '3'
+LobbyIDPlaceholder: '{lobbyid}'
+# Shows the leftover time of the given lobby in minutes
+LeftOverMinutesPlaceholder: '{leftovertime}'
+
 
 
 # *** Shop Options ***
@@ -160,25 +176,35 @@ DemonRun:
 
 
 # *** Message Settings ***
+
+# Comments are used to show which placeholders can work
+
+# Both run and lobby placeholders
 CanNotOpenRunGUImsg: "Sorry, but you aren't allowed to play this run yet."
-CanNotOpenShopGUImsg: "Sorry, but you can't shop here yet."
 LobbyFullMsg: 'This lobby is full. Please wait for it to finish.'
 RunStartMsg: 'The lobby is full! The run starts in 10 seconds.'
 PassedLevelMsg: 'You handed the key over. Your team is being teleported to the next level.'
 RunFinishMsg: 'You successfully defeated the final boss and completed the run. You earned {runpointsamount} {runpointsname}s.'
-ShopNotEnoughPointsMsg: "You don't have enough points to buy this item."
-ShopBoughtSuccessfullyMsg: 'You successfully bought this item.'
-# When someone uses the '/mobrun info' command:
-DisplayRunPointsMsg: 'You currently have the following amount of runpoints:'
-CouldNotFinishInTimeMsg: "You didn't finish the game in time. You have been teleported out."
-BackInGameMsg: 'You came back and the run is still on, you got teleported to the last checkpoint.'
-# The players get these messages when they were in a run, but a server shutdown occured and the run finished automatically, and on next join they are at the run's starting NPC.
-AfterShutDown1Msg: 'The server has been down, therefore the run is over. You lost your progress.'
-AfterShutDown2Msg: "If the shutdown wasn't planned and broadcasted in time, contact the admins. Otherwise, we can't do anything. Sorry."
 # When someone tries to use any form of teleport during run, even if the player is an OP
 CanNotLeaveMsg: 'Sorry, but you cannot leave your group while you are in a run. Please, finish the run first.'
+BackInGameMsg: 'You came back and the run is still on, you got teleported to the last checkpoint.'
+CouldNotFinishInTimeMsg: "You didn't finish the game in time. You have been teleported out."
+
+# Only run placeholders
+# When someone uses the '/mobrun info' command:
+DisplayRunPointsMsg: 'You currently have the following amount of runpoints:'
+
+# Both shop and run placeholders
 # Admin command related feedbacks:
 MobrunShopCreateCommandSuccessMsg: 'You successfully created a shop in the config. Please go to the config file and edit the rest.'
 MobrunShopCreateCommandFailureMsg: 'A shop with this name already exists.'
 MobrunShopAddCommandSuccessMsg: 'You successfully copied the data of the item in your hand to {shopname} with the price set to {price}.'
 MobrunShopAddCommandFailureMsg: 'You cannot add any items to that shop, because the config is invalid.'
+CanNotOpenShopGUImsg: "Sorry, but you can't shop here yet."
+ShopNotEnoughPointsMsg: "You don't have enough points to buy this item."
+ShopBoughtSuccessfullyMsg: 'You successfully bought this item.'
+
+# No placeholders can be used
+# The players get these messages when they were in a run, but a server shutdown occured and the run finished automatically, and on next join they are at the run's starting NPC.
+AfterShutDown1Msg: 'The server has been down, therefore the run is over. You lost your progress.'
+AfterShutDown2Msg: "If the shutdown wasn't planned and broadcasted in time, contact the admins. Otherwise, we can't do anything. Sorry."
