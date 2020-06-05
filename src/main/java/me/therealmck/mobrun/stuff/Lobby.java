@@ -8,6 +8,7 @@ public class Lobby {
     private List<Player> players;
     private final SubRun subRun;
     private Level currentLevel;
+    private int currentLevelIndex;
     private boolean isRunning;
     private int secondsLeft;
 
@@ -16,6 +17,7 @@ public class Lobby {
         this.isRunning = false;
         this.secondsLeft = 0;
         this.currentLevel = subRun.getLevels().get(0);
+        this.currentLevelIndex = 0;
     }
 
     public List<Player> getPlayers() {
@@ -30,6 +32,8 @@ public class Lobby {
         return currentLevel;
     }
 
+    public int getCurrentLevelIndex() { return currentLevelIndex; }
+
 
     public void addPlayer(Player player) {
         this.players.add(player);
@@ -37,8 +41,9 @@ public class Lobby {
 
     public void removePlayer(Player player) { this.players.remove(player); }
 
-    public void setCurrentLevel(Level level) {
-        this.currentLevel = level;
+    public void increaseCurrentLevel() {
+        this.currentLevelIndex++;
+        this.currentLevel = subRun.getLevels().get(currentLevelIndex);
     }
 
 

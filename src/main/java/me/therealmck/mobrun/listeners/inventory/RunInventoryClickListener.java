@@ -3,6 +3,7 @@ package me.therealmck.mobrun.listeners.inventory;
 import me.therealmck.mobrun.Main;
 import me.therealmck.mobrun.stuff.Lobby;
 import me.therealmck.mobrun.stuff.Run;
+import me.therealmck.mobrun.stuff.SubRun;
 import me.therealmck.mobrun.utils.MessageHelper;
 import me.therealmck.mobrun.utils.Utils;
 import net.citizensnpcs.api.CitizensAPI;
@@ -31,6 +32,13 @@ public class RunInventoryClickListener implements Listener {
                     if (lobby.isRunning()) {
                         p.sendMessage(lang.getLobbyFull());
                         return;
+                    }
+
+                    // Remove player from lobby if they were previously in one
+                    for (Run r : Main.activeRuns) {
+                        for (SubRun s : r.getAvailableRuns()) {
+                            s.getLobby().removePlayer(p);
+                        }
                     }
 
                     lobby.addPlayer(p);
