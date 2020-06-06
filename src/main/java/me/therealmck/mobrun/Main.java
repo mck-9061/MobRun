@@ -1,5 +1,7 @@
 package me.therealmck.mobrun;
 
+import me.therealmck.mobrun.listeners.*;
+import me.therealmck.mobrun.listeners.inventory.RunInventoryClickListener;
 import me.therealmck.mobrun.stuff.Lobby;
 import me.therealmck.mobrun.stuff.Run;
 import me.therealmck.mobrun.stuff.Shop;
@@ -31,8 +33,8 @@ public class Main extends JavaPlugin {
     public static Plugin instance;
 
     // These fields just store all active stuff, hence why it's a terrible idea to hot-reload
-    public static List<Run> activeRuns;
-    public static List<Shop> activeShops;
+    public static List<Run> activeRuns = new ArrayList<>();
+    public static List<Shop> activeShops = new ArrayList<>();
 
     @Override
     public void onEnable() {
@@ -42,7 +44,6 @@ public class Main extends JavaPlugin {
         createDataConfig();
 
         // Add all runs/shops etc. from config
-        List<String> runs = new ArrayList<>();
 
         // This is kinda hacky but I cba moving everything to a better system
         List<String> sysKeys = Arrays.asList("MembersJoinedPlaceholder", "ActiveMembersNamesPlaceholder", "LobbyIDPlaceholder", "RunNamePlaceholder",
@@ -50,7 +51,7 @@ public class Main extends JavaPlugin {
                 "Shops", "CanNotOpenRunGUImsg", "CanNotOpenShopGUImsg", "RunStartMsg", "PassedLevelMsg", "RunFinishMsg", "ShopNotEnoughPointsMsg",
                 "ShopBoughtSuccessfullyMsg", "DisplayRunPointsMsg", "CouldNotFinishInTimeMsg", "BackInGameMsg", "AfterShutDown1Msg", "AfterShutDown2Msg",
                 "CanNotLeaveMsg", "MobrunShopCreateCommandSuccessMsg", "MobrunShopCreateCommandFailureMsg", "MobrunShopAddCommandSuccessMsg",
-                "MobrunShopAddCommandFailureMsg");
+                "MobrunShopAddCommandFailureMsg", "LobbyFullMsg", "AllPlayersDeadMsg");
 
         for (String key : mobrunConfig.getKeys(false)) {
             if (!sysKeys.contains(key)) activeRuns.add(new Run(mobrunConfig, key));
@@ -61,6 +62,14 @@ public class Main extends JavaPlugin {
         for (String key : shopSection.getKeys(false)) {
             activeShops.add(new Shop(key));
         }
+
+        // Register all the listeners
+        getServer().getPluginManager().registerEvents(new RunInventoryClickListener(), this);
+        getServer().getPluginManager().registerEvents(new JoinListener(), this);
+        getServer().getPluginManager().registerEvents(new KeyNPCClickListener(), this);
+        getServer().getPluginManager().registerEvents(new RunNPCClickListener(), this);
+        getServer().getPluginManager().registerEvents(new ShopNPCClickListener(), this);
+        getServer().getPluginManager().registerEvents(new TeleportListener(), this);
 
     }
 
@@ -73,7 +82,7 @@ public class Main extends JavaPlugin {
                 for (Player p : subRun.getLobby().getPlayers()) {
                     for (NPC npc : CitizensAPI.getNPCRegistry()) {
                         if (npc.getName().equals(run.getNpcName())) {
-                            dataConfig.set(p.getUniqueId()+".loc", npc.getStoredLocation().serialize());
+                            dataConfig.set(p.getUniqueId()+".npc", npc.getName());
                             saveDataConfig();
                         }
                     }

@@ -180,7 +180,6 @@ DemonRun:
 # Comments are used to show which placeholders can work
 
 # Both run and lobby placeholders
-CanNotOpenRunGUImsg: "Sorry, but you aren't allowed to play this run yet."
 LobbyFullMsg: 'This lobby is full. Please wait for it to finish.'
 RunStartMsg: 'The lobby is full! The run starts in 10 seconds.'
 PassedLevelMsg: 'You handed the key over. Your team is being teleported to the next level.'
@@ -189,6 +188,7 @@ RunFinishMsg: 'You successfully defeated the final boss and completed the run. Y
 CanNotLeaveMsg: 'Sorry, but you cannot leave your group while you are in a run. Please, finish the run first.'
 BackInGameMsg: 'You came back and the run is still on, you got teleported to the last checkpoint.'
 CouldNotFinishInTimeMsg: "You didn't finish the game in time. You have been teleported out."
+AllPlayersDeadMsg: 'All players in the run have died. The run is over.'
 
 # Only run placeholders
 # When someone uses the '/mobrun info' command:
@@ -208,3 +208,4 @@ ShopBoughtSuccessfullyMsg: 'You successfully bought this item.'
 # The players get these messages when they were in a run, but a server shutdown occured and the run finished automatically, and on next join they are at the run's starting NPC.
 AfterShutDown1Msg: 'The server has been down, therefore the run is over. You lost your progress.'
 AfterShutDown2Msg: "If the shutdown wasn't planned and broadcasted in time, contact the admins. Otherwise, we can't do anything. Sorry."
+CanNotOpenRunGUImsg: "Sorry, but you aren't allowed to play this run yet."

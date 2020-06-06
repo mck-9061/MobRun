@@ -43,7 +43,9 @@ public class RunInventoryClickListener implements Listener {
 
                     lobby.addPlayer(p);
 
-                    if (lobby.getPlayers().size() == 5) {
+                    // TODO: This is debug so I don't have to get others to join. Change to 5 in prod.
+                    if (lobby.getPlayers().size() == 1) {
+                        lobby.setRunning(true);
 
                         // Start run 10 seconds later
                         for (Player player : lobby.getPlayers()) player.sendMessage(utils.replaceRunAndLobbyPlaceholders(lang.getRunStart(), run, lobby));
@@ -53,7 +55,7 @@ public class RunInventoryClickListener implements Listener {
                                 // Start run
                                 lobby.startRunning();
                                 for (Player player : lobby.getPlayers()) {
-                                    player.teleport(lobby.getCurrentLevel().getInitialTeleport());
+                                    player.teleport(lobby.getCurrentLevel().getCheckpoint());
                                 }
                             }
                         }.runTaskLater(Main.instance, 200L);

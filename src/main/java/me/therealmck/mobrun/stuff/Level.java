@@ -27,8 +27,13 @@ public class Level {
 
         String[] xyz = config.getString(subRun.getRun().getId()+".RunProcessInformation."+subRun.getId()+"."+id+".CheckPointLocation").split(" ");
         this.checkpoint = new Location(Bukkit.getWorld(config.getString(subRun.getRun().getId()+
-                ".RunProcessInformation."+subRun.getId()+"."+id+"WorldNameCheckPoint")), Integer.parseInt(xyz[0]),
+                ".RunProcessInformation."+subRun.getId()+"."+id+".WorldNameCheckPoint")), Integer.parseInt(xyz[0]),
                 Integer.parseInt(xyz[1]), Integer.parseInt(xyz[2]));
+
+        String[] xyz2 = config.getString(subRun.getRun().getId()+".RunProcessInformation."+subRun.getId()+"."+id+".TeleportToLocation").split(" ");
+        this.initialTeleport = new Location(Bukkit.getWorld(config.getString(subRun.getRun().getId()+
+                ".RunProcessInformation."+subRun.getId()+"."+id+".WorldNameTeleport")), Integer.parseInt(xyz2[0]),
+                Integer.parseInt(xyz2[1]), Integer.parseInt(xyz2[2]));
     }
 
     public String getId() {

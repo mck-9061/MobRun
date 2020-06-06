@@ -16,13 +16,14 @@ public class SubRun {
         this.id = id;
         this.run = run;
         this.levels = new ArrayList<>();
-        this.lobby = new Lobby(this);
 
         ConfigurationSection section = config.getConfigurationSection(run.getId()+".RunProcessInformation."+id);
 
         for (String key : section.getKeys(false)) {
             levels.add(new Level(key, this, config));
         }
+
+        this.lobby = new Lobby(this);
     }
 
     public String getId() {

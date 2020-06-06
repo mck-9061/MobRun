@@ -27,71 +27,81 @@ public class KeyNPCClickListener implements Listener {
                     Level currentLevel = lobby.getCurrentLevel();
                     ItemStack heldItem = p.getInventory().getItemInMainHand();
 
-                    if (heldItem.getItemMeta().hasDisplayName()) {
-                        // Strip format codes for comparison
-                        String heldItemName = heldItem.getItemMeta().getDisplayName();
-                        String keyName = currentLevel.getKeyItem();
+                    //Check it's the correct NPC
+                    if (!event.getNPC().getName().equals(lobby.getCurrentLevel().getNpcName())) {
+                        return;
+                    }
 
-                        StringBuilder compareHeldItemName = new StringBuilder(heldItemName);
-                        StringBuilder compareKeyName = new StringBuilder(keyName);
-                        int count = 0;
+                    try {
+                        if (heldItem.getItemMeta().hasDisplayName()) {
+                            // Strip format codes for comparison
+                            String heldItemName = heldItem.getItemMeta().getDisplayName();
+                            String keyName = currentLevel.getKeyItem();
 
-                        for (Character c : heldItemName.toCharArray()) {
-                            if (c.equals('§') || c.equals('&')) {
-                                try {
-                                    compareHeldItemName.deleteCharAt(count);
-                                    compareHeldItemName.deleteCharAt(count+1);
-                                } catch (Exception ignored) {}
-                            }
-                            count++;
-                        }
+                            StringBuilder compareHeldItemName = new StringBuilder(heldItemName);
+                            StringBuilder compareKeyName = new StringBuilder(keyName);
+                            int count = 0;
 
-                        count = 0;
-
-                        for (Character c : keyName.toCharArray()) {
-                            if (c.equals('§') || c.equals('&')) {
-                                try {
-                                    compareKeyName.deleteCharAt(count);
-                                    compareKeyName.deleteCharAt(count+1);
-                                } catch (Exception ignored) {}
-                            }
-                            count++;
-                        }
-
-
-                        if (compareHeldItemName.toString().equals(compareKeyName.toString())) {
-                            MessageHelper lang = new MessageHelper(Main.getMobrunConfig());
-                            Utils utils = new Utils();
-                            p.getInventory().remove(heldItem);
-                            if (currentLevel.getFinalLevel()) {
-                                // TODO: Bossbar
-                                // Get location to TP back to
-                                for (NPC npc : CitizensAPI.getNPCRegistry()) {
-                                    if (npc.getName().equals(run.getNpcName())) {
-                                        for (Player pl : lobby.getPlayers()) {
-                                            // Teleporting on main thread so bukkit doesn't shout at me
-                                            Bukkit.getScheduler().runTask(Main.instance, () -> {pl.teleport(npc.getStoredLocation());});
-                                            pl.sendMessage(utils.replaceRunAndLobbyPlaceholders(lang.getRunFinish(), run, lobby));
-
-                                            // Add run points
-                                            int currentPoints = Main.getPlayerConfig().getInt(pl.getUniqueId()+"."+run.getPointsName());
-                                            currentPoints += run.getPointsReward();
-                                            Main.getPlayerConfig().set(pl.getUniqueId()+"."+run.getPointsName(), currentPoints);
-                                            Main.savePlayerConfig();
-                                        }
+                            for (Character c : heldItemName.toCharArray()) {
+                                if (c.equals('§') || c.equals('&')) {
+                                    try {
+                                        compareHeldItemName.deleteCharAt(count);
+                                        compareHeldItemName.deleteCharAt(count + 1);
+                                    } catch (Exception ignored) {
                                     }
                                 }
+                                count++;
+                            }
 
-                                lobby.stopRunning();
-                            } else {
-                                lobby.increaseCurrentLevel();
-                                for (Player player : lobby.getPlayers()) {
-                                    player.teleport(lobby.getCurrentLevel().getInitialTeleport());
-                                    player.sendMessage(utils.replaceRunAndLobbyPlaceholders(lang.getPassedLevel(), run, lobby));
+                            count = 0;
+
+                            for (Character c : keyName.toCharArray()) {
+                                if (c.equals('§') || c.equals('&')) {
+                                    try {
+                                        compareKeyName.deleteCharAt(count);
+                                        compareKeyName.deleteCharAt(count + 1);
+                                    } catch (Exception ignored) {
+                                    }
+                                }
+                                count++;
+                            }
+
+
+                            if (compareHeldItemName.toString().equals(compareKeyName.toString())) {
+                                MessageHelper lang = new MessageHelper(Main.getMobrunConfig());
+                                Utils utils = new Utils();
+                                p.getInventory().remove(heldItem);
+                                if (currentLevel.getFinalLevel()) {
+                                    // Get location to TP back to
+                                    for (NPC npc : CitizensAPI.getNPCRegistry()) {
+                                        if (npc.getName().equals(run.getNpcName())) {
+                                            for (Player pl : lobby.getPlayers()) {
+                                                // Teleporting on main thread so bukkit doesn't shout at me
+                                                Bukkit.getScheduler().runTask(Main.instance, () -> {
+                                                    pl.teleport(npc.getStoredLocation());
+                                                });
+                                                pl.sendMessage(utils.replaceRunAndLobbyPlaceholders(lang.getRunFinish(), run, lobby));
+
+                                                // Add run points
+                                                int currentPoints = Main.getPlayerConfig().getInt(pl.getUniqueId() + "." + run.getPointsName());
+                                                currentPoints += run.getPointsReward();
+                                                Main.getPlayerConfig().set(pl.getUniqueId() + "." + run.getPointsName(), currentPoints);
+                                                Main.savePlayerConfig();
+                                            }
+                                        }
+                                    }
+
+                                    lobby.stopRunning();
+                                } else {
+                                    lobby.increaseCurrentLevel();
+                                    for (Player player : lobby.getPlayers()) {
+                                        player.teleport(lobby.getCurrentLevel().getCheckpoint());
+                                        player.sendMessage(utils.replaceRunAndLobbyPlaceholders(lang.getPassedLevel(), run, lobby));
+                                    }
                                 }
                             }
                         }
-                    }
+                    } catch (Exception ignored) {}
                 }
             }
         }

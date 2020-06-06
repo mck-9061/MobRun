@@ -23,6 +23,7 @@ public class MessageHelper {
     private String createShopAlreadyExists;
     private String addItemToShopSuccess;
     private String addItemToShopInvalid;
+    private String allPlayersDead;
 
     public MessageHelper(FileConfiguration config) {
         this.config = config;
@@ -45,6 +46,7 @@ public class MessageHelper {
         this.createShopAlreadyExists = config.getString("MobrunShopCreateCommandFailureMsg");
         this.addItemToShopSuccess = config.getString("MobrunShopAddCommandSuccessMsg");
         this.addItemToShopInvalid = config.getString("MobrunShopAddCommandFailureMsg");
+        this.allPlayersDead = config.getString("AllPlayersDeadMsg");
     }
 
     public String getCannotOpenRunGui() {
@@ -116,4 +118,6 @@ public class MessageHelper {
     }
 
     public String getLobbyFull() { return lobbyFullMsg; }
+
+    public String getAllPlayersDead() { return allPlayersDead; }
 }

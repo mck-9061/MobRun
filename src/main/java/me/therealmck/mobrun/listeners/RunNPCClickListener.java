@@ -38,11 +38,12 @@ public class RunNPCClickListener implements Listener {
                     for (SubRun subRun : subRuns) {
                         // Replace every line in lore
                         List<String> finalLore = new ArrayList<>();
-                        finalLore.addAll(run.getWoolLore());
-                        for (String s : finalLore) {
-                            finalLore.remove(s);
-                            s = utils.replaceRunAndLobbyPlaceholders(s, run, subRun.getLobby());
-                            finalLore.add(s);
+                        List<String> aLore = new ArrayList<>();
+                        aLore.addAll(run.getWoolLore());
+                        for (String s : aLore) {
+                            String st = s;
+                            st = utils.replaceRunAndLobbyPlaceholders(s, run, subRun.getLobby());
+                            finalLore.add(st);
                         }
 
                         if (subRun.getLobby().isRunning()) {
@@ -55,7 +56,7 @@ public class RunNPCClickListener implements Listener {
 
                     event.getClicker().openInventory(gui);
                 } else {
-                    event.getClicker().sendMessage(utils.replaceRunPlaceholders(lang.getCannotOpenRunGui(), run, Main.getMobrunConfig()));
+                    event.getClicker().sendMessage(lang.getCannotOpenRunGui());
                 }
             }
         }
