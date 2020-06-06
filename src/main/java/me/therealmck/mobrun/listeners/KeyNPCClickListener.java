@@ -82,7 +82,7 @@ public class KeyNPCClickListener implements Listener {
                                     }
                                 }
 
-                                // Cancel the timer... somehow
+                                lobby.stopRunning();
                             } else {
                                 lobby.increaseCurrentLevel();
                                 for (Player player : lobby.getPlayers()) {

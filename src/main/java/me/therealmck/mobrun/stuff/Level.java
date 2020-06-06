@@ -26,7 +26,9 @@ public class Level {
         this.isFinalLevel = config.getBoolean(subRun.getRun().getId()+".RunProcessInformation."+subRun.getId()+"."+id+".FinalLevel");
 
         String[] xyz = config.getString(subRun.getRun().getId()+".RunProcessInformation."+subRun.getId()+"."+id+".CheckPointLocation").split(" ");
-        this.checkpoint = new Location(Bukkit.getWorld(config.getString(subRun.getRun().getId()+".RunProcessInformation."+subRun.getId()+"."+id+"WorldNameCheckPoint")), Integer.parseInt(xyz[0]), Integer.parseInt(xyz[1]), Integer.parseInt(xyz[2]));
+        this.checkpoint = new Location(Bukkit.getWorld(config.getString(subRun.getRun().getId()+
+                ".RunProcessInformation."+subRun.getId()+"."+id+"WorldNameCheckPoint")), Integer.parseInt(xyz[0]),
+                Integer.parseInt(xyz[1]), Integer.parseInt(xyz[2]));
     }
 
     public String getId() {
