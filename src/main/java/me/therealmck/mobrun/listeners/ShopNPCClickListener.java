@@ -7,12 +7,14 @@ import me.therealmck.mobrun.utils.Utils;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,13 +31,14 @@ public class ShopNPCClickListener implements Listener {
                 if (event.getClicker().hasPermission(shop.getPermission())) {
                     // Create shop GUI and open it for player
 
-                    HashMap<ItemStack, Integer> items = shop.getItems();
-                    int rowsNeeded = ((items.keySet().size() % 9) + 1) * 9;
+                    ConfigurationSection items = shop.getItems();
+                    int rowsNeeded = ((items.getKeys(false).size() % 9) + 1) * 9;
 
                     Inventory gui = Bukkit.createInventory(event.getClicker(), rowsNeeded, shop.getDisplayName());
                     int count = 0;
 
-                    for (ItemStack item : items.keySet()) {
+                    for (String key : items.getKeys(false)) {
+                        ItemStack item = items.getItemStack(key+".Item");
                         ItemMeta meta = item.getItemMeta();
                         ItemStack original = item;
                         item = item.clone();
@@ -43,24 +46,24 @@ public class ShopNPCClickListener implements Listener {
                         if (meta.hasLore()) {
                             List<String> lore = meta.getLore();
                             lore.addAll(shop.getItemLore());
+                            List<String> finalLore = new ArrayList<>();
 
                             for (String s : lore) {
-                                lore.remove(s);
-                                s = utils.replaceShopPlaceholders(s, shop, Main.getMobrunConfig(), original);
-                                lore.add(s);
+                                String newS = utils.replaceShopPlaceholders(s, shop, Main.getMobrunConfig(), original);
+                                finalLore.add(newS);
                             }
 
-                            meta.setLore(lore);
+                            meta.setLore(finalLore);
                         } else {
                             List<String> lore = shop.getItemLore();
+                            List<String> finalLore = new ArrayList<>();
 
                             for (String s : lore) {
-                                lore.remove(s);
-                                s = utils.replaceShopPlaceholders(s, shop, Main.getMobrunConfig(), original);
-                                lore.add(s);
+                                String newS = utils.replaceShopPlaceholders(s, shop, Main.getMobrunConfig(), original);
+                                finalLore.add(newS);
                             }
 
-                            meta.setLore(lore);
+                            meta.setLore(finalLore);
                         }
 
                         item.setItemMeta(meta);

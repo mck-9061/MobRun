@@ -43,8 +43,7 @@ public class RunInventoryClickListener implements Listener {
 
                     lobby.addPlayer(p);
 
-                    // TODO: This is debug so I don't have to get others to join. Change to 5 in prod.
-                    if (lobby.getPlayers().size() == 1) {
+                    if (lobby.getPlayers().size() == 5) {
                         lobby.setRunning(true);
 
                         // Start run 10 seconds later

@@ -105,9 +105,8 @@ public class Lobby {
     public void startRunning() {
         this.isRunning = true;
         bossBar.setProgress(1.0);
-        // Set the timer to a high value so it doesn't immediately end
         this.secondsLeft = maxSeconds;
-        timer.runTaskTimerAsynchronously(Main.instance, 0L, 20L);
+        timer.runTaskTimer(Main.instance, 0L, 20L);
 
         for (Player p : players) bossBar.addPlayer(p);
     }

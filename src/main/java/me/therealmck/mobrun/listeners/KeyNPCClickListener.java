@@ -83,10 +83,14 @@ public class KeyNPCClickListener implements Listener {
                                                 pl.sendMessage(utils.replaceRunAndLobbyPlaceholders(lang.getRunFinish(), run, lobby));
 
                                                 // Add run points
-                                                int currentPoints = Main.getPlayerConfig().getInt(pl.getUniqueId() + "." + run.getPointsName());
-                                                currentPoints += run.getPointsReward();
-                                                Main.getPlayerConfig().set(pl.getUniqueId() + "." + run.getPointsName(), currentPoints);
-                                                Main.savePlayerConfig();
+                                                if (pl.isOnline()) {
+                                                    int currentPoints = Main.getPlayerConfig().getInt(pl.getUniqueId() + "." + run.getPointsName());
+                                                    currentPoints += run.getPointsReward();
+                                                    Main.getPlayerConfig().set(pl.getUniqueId() + "." + run.getPointsName(), currentPoints);
+                                                    Main.savePlayerConfig();
+                                                } else {
+                                                    Main.defectors.put(pl, npc.getStoredLocation());
+                                                }
                                             }
                                         }
                                     }

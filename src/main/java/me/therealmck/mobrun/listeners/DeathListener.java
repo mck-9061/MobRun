@@ -22,15 +22,20 @@ public class DeathListener implements Listener {
         for (Run run : Main.activeRuns) {
             for (SubRun subRun : run.getAvailableRuns()) {
                 boolean shouldStop = true;
+                boolean foundPlayer = false;
                 for (Player player : subRun.getLobby().getPlayers()) {
                     if (player.getUniqueId().equals(event.getEntity().getUniqueId())) {
+                        foundPlayer = true;
                         event.setKeepInventory(true);
                         event.setKeepLevel(true);
                         event.getEntity().setHealth(20);
                         event.getEntity().setGameMode(GameMode.SPECTATOR);
                     }
+                }
+                if (!foundPlayer) return;
 
-                    if (player.getGameMode().equals(GameMode.SURVIVAL)) shouldStop = false;
+                for (Player player : subRun.getLobby().getPlayers()) {
+                    if (!player.getGameMode().equals(GameMode.SPECTATOR)) shouldStop = false;
                 }
 
                 if (shouldStop) {

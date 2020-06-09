@@ -7,4 +7,5 @@ depend:
   - Citizens
 commands:
   mobrun:
-    
+    description: Mobrun command
+    usage: /mobrun [info/shop]

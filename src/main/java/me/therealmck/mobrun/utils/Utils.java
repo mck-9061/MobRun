@@ -18,10 +18,12 @@ public class Utils {
 
     public String replaceRunPlaceholders(String string, Run run, FileConfiguration config) {
         String toReplace = string;
-        toReplace = toReplace.replace(config.getString("RunNamePlaceholder"), run.getName());
-        toReplace = toReplace.replace(config.getString("RunPointsNamePlaceholder"), run.getPointsName());
-        toReplace = toReplace.replace(config.getString("RunPointsAmountPlaceholder"), String.valueOf(run.getPointsReward()));
-        toReplace = toReplace.replace(config.getString("RunNamePlaceholder"), run.getName());
+        try {
+            toReplace = toReplace.replace(config.getString("RunNamePlaceholder"), run.getName());
+            toReplace = toReplace.replace(config.getString("RunPointsNamePlaceholder"), run.getPointsName());
+            toReplace = toReplace.replace(config.getString("RunPointsAmountPlaceholder"), String.valueOf(run.getPointsReward()));
+            toReplace = toReplace.replace(config.getString("RunNamePlaceholder"), run.getName());
+        } catch (Exception ignored) {}
 
         return toReplace;
     }
@@ -36,8 +38,11 @@ public class Utils {
 
         for (Player player : players) {
             finalString += player.getName() + ", ";
-            finalString = finalString.substring(0, finalString.length() - 2);
         }
+
+        try {
+            finalString = finalString.substring(0, finalString.length() - 2);
+        } catch (Exception ignored) {}
 
         toReplace = toReplace.replace(config.getString("ActiveMembersNamesPlaceholder"), finalString);
         toReplace = toReplace.replace(config.getString("LobbyIDPlaceholder"), lobby.getSubRun().getId());
@@ -49,16 +54,32 @@ public class Utils {
     public String replaceShopPlaceholders(String string, Shop shop, FileConfiguration config, ItemStack originalItem) {
         String toReplace = string;
 
-        toReplace = toReplace.replace(config.getString("ItemPricePlaceholder"), String.valueOf(shop.getItems().get(originalItem)));
+        if (shop.getItemPrice(originalItem) == -1) {
+            toReplace = toReplace.replace(config.getString("ItemPricePlaceholder"), "Invalid price!");
+        } else {
+            toReplace = toReplace.replace(config.getString("ItemPricePlaceholder"), String.valueOf(shop.getItemPrice(originalItem)));
+        }
         toReplace = toReplace.replace(config.getString("ShopNamePlaceholder"), shop.getDisplayName());
+
+        Run run = shop.getRunHook();
+        try {
+            toReplace = toReplace.replace(config.getString("RunNamePlaceholder"), run.getName());
+            toReplace = toReplace.replace(config.getString("RunPointsNamePlaceholder"), run.getPointsName());
+            toReplace = toReplace.replace(config.getString("RunPointsAmountPlaceholder"), String.valueOf(run.getPointsReward()));
+            toReplace = toReplace.replace(config.getString("RunNamePlaceholder"), run.getName());
+        } catch (Exception ignored) {}
 
         return toReplace;
     }
 
     public String replaceRunAndLobbyPlaceholders(String string, Run run, Lobby lobby) {
         String s = string;
-        s = replaceRunPlaceholders(s, run, Main.getMobrunConfig());
-        s = replaceLobbyPlaceholders(s, lobby, Main.getMobrunConfig());
+        try {
+            s = replaceRunPlaceholders(s, run, Main.getMobrunConfig());
+            s = replaceLobbyPlaceholders(s, lobby, Main.getMobrunConfig());
+        } catch (Exception e) {
+
+        }
         return s;
     }
 

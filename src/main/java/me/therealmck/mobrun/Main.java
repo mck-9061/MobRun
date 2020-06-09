@@ -1,7 +1,10 @@
 package me.therealmck.mobrun;
 
+import gnu.trove.map.hash.THashMap;
+import me.therealmck.mobrun.commands.MobRunCommand;
 import me.therealmck.mobrun.listeners.*;
 import me.therealmck.mobrun.listeners.inventory.RunInventoryClickListener;
+import me.therealmck.mobrun.listeners.inventory.ShopInventoryClickListener;
 import me.therealmck.mobrun.stuff.Lobby;
 import me.therealmck.mobrun.stuff.Run;
 import me.therealmck.mobrun.stuff.Shop;
@@ -9,6 +12,7 @@ import me.therealmck.mobrun.stuff.SubRun;
 import net.citizensnpcs.Citizens;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
+import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -21,6 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class Main extends JavaPlugin {
@@ -31,6 +36,7 @@ public class Main extends JavaPlugin {
     public static File dataFile;
     public static FileConfiguration dataConfig;
     public static Plugin instance;
+    public static HashMap<Player, Location> defectors = new HashMap<>();
 
     // These fields just store all active stuff, hence why it's a terrible idea to hot-reload
     public static List<Run> activeRuns = new ArrayList<>();
@@ -42,6 +48,7 @@ public class Main extends JavaPlugin {
         createMobrunConfig();
         createPlayerConfig();
         createDataConfig();
+        saveResource("configtemplate.yml", true);
 
         // Add all runs/shops etc. from config
 
@@ -70,7 +77,11 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new RunNPCClickListener(), this);
         getServer().getPluginManager().registerEvents(new ShopNPCClickListener(), this);
         getServer().getPluginManager().registerEvents(new TeleportListener(), this);
+        getServer().getPluginManager().registerEvents(new ShopInventoryClickListener(), this);
+        getServer().getPluginManager().registerEvents(new DeathListener(), this);
 
+        // Register the command
+        this.getCommand("mobrun").setExecutor(new MobRunCommand());
     }
 
     @Override

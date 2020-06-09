@@ -36,18 +36,27 @@ public class JoinListener implements Listener {
         Main.savePlayerConfig();
 
         // Send messages if the server just shut down
-        for (String key : Main.getDataConfig().getKeys(false)) {
-            MessageHelper lang = new MessageHelper(Main.getMobrunConfig());
-            Player p = Bukkit.getPlayer(UUID.fromString(key));
-            for (NPC npc : CitizensAPI.getNPCRegistry()) {
-                if (npc.getName().equals(Main.getDataConfig().get(key+".npc"))) {
-                    p.teleport(npc.getStoredLocation());
-                    p.sendMessage(lang.getAfterShutDown1());
-                    p.sendMessage(lang.getAfterShutDown2());
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (String key : Main.getDataConfig().getKeys(false)) {
+                    MessageHelper lang = new MessageHelper(Main.getMobrunConfig());
+                    if (key.equals(event.getPlayer().getUniqueId().toString())) {
+                        Player p = event.getPlayer();
+                        for (NPC npc : CitizensAPI.getNPCRegistry()) {
+                            if (npc.getName().equals(Main.getDataConfig().get(key + ".npc"))) {
+                                p.teleport(npc.getEntity().getLocation());
+                                p.sendMessage(lang.getAfterShutDown1());
+                                p.sendMessage(lang.getAfterShutDown2());
+                            }
+                        }
+                        Main.getDataConfig().set(key, null);
+                        Main.saveDataConfig();
+                    }
                 }
             }
-            Main.getDataConfig().set(key, null);
-        }
+        }.runTaskLater(Main.instance, 10L);
+
 
         // TP Player to last checkpoint if they're in a lobby
         for (Run run : Main.activeRuns) {
@@ -61,8 +70,6 @@ public class JoinListener implements Listener {
                         MessageHelper lang = new MessageHelper(Main.getMobrunConfig());
                         event.getPlayer().sendMessage(lang.getBackToGameAfterDisconnect());
                         event.getPlayer().teleport(subRun.getLobby().getCurrentLevel().getCheckpoint());
-                    } else {
-                        System.out.println(player.getUniqueId().toString()+" is not "+event.getPlayer().getUniqueId());
                     }
                 }
 
@@ -70,6 +77,14 @@ public class JoinListener implements Listener {
                     subRun.getLobby().swapPlayer(swapFrom, event.getPlayer());
                     subRun.getLobby().fixBossBar();
                 }
+            }
+        }
+
+        // TP Player to NPC if they defected
+        for (Player player : Main.defectors.keySet()) {
+            if (player.getUniqueId().equals(event.getPlayer().getUniqueId())) {
+                Bukkit.getScheduler().runTaskLater(Main.instance, () -> {event.getPlayer().teleport(Main.defectors.get(player));}, 10L);
+                Main.defectors.remove(player);
             }
         }
 

@@ -13,19 +13,25 @@ public class Shop {
     private String displayName;
     private String npcName;
     private String permission;
+    private String id;
     private List<String> itemLore;
-    private HashMap<ItemStack, Integer> items;
+    private ConfigurationSection items;
 
     public Shop(String shopName) {
         FileConfiguration config = Main.getMobrunConfig();
         ConfigurationSection section = config.getConfigurationSection("Shops."+shopName);
 
+        this.id = shopName;
         this.runHook = new Run(config, section.getString("HookThisRun"));
         this.displayName = section.getString("DisplayName");
         this.npcName = section.getString("NPCname");
         this.permission = section.getString("ShopGUIopenPermission");
         this.itemLore = section.getStringList("PriceLore");
-        this.items = (HashMap<ItemStack, Integer>) section.get("Items");
+        this.items = section.getConfigurationSection("Items");
+        if (items == null) {
+            section.createSection("Items");
+            this.items = section.getConfigurationSection("Items");
+        }
     }
 
     public Run getRunHook() {
@@ -48,13 +54,30 @@ public class Shop {
         return itemLore;
     }
 
-    public HashMap<ItemStack, Integer> getItems() {
+    public ConfigurationSection getItems() {
         return items;
     }
 
     public void addItem(ItemStack item, Integer price) {
-        items.put(item, price);
-        Main.getMobrunConfig().set("Shops."+displayName+".Items", items);
+        int count = 0;
+        for (String ignored : items.getKeys(false)) count++;
+
+        ConfigurationSection section = items.createSection(String.valueOf(count+1));
+
+        section.set("Item", item);
+        section.set("Price", price);
+
         Main.saveMobrunConfig();
+    }
+
+    public String getId() { return id; }
+
+    public int getItemPrice(ItemStack item) {
+        for (String key : items.getKeys(false)) {
+            if (items.getItemStack(key+".Item").equals(item)) {
+                return items.getInt(key+".Price");
+            }
+        }
+        return -1;
     }
 }

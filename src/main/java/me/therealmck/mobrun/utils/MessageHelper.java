@@ -28,8 +28,8 @@ public class MessageHelper {
     public MessageHelper(FileConfiguration config) {
         this.config = config;
 
-        this.cannotOpenRunGui = config.getString("CanNotOpenRunGuiMsg");
-        this.cannotOpenShopGui = config.getString("CanNotOpenShopGuiMsg");
+        this.cannotOpenRunGui = config.getString("CanNotOpenRunGUImsg");
+        this.cannotOpenShopGui = config.getString("CanNotOpenShopGUImsg");
         this.lobbyFullMsg = config.getString("LobbyFullMsg");
         this.runStart = config.getString("RunStartMsg");
         this.passedLevel = config.getString("PassedLevelMsg");

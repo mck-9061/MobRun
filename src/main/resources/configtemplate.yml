@@ -1,18 +1,45 @@
+# This file is simply a template for config.yml.
+# It shows what each of the settings does.
+# Changing setting here won't affect the plugin - change the settings in config.yml.
+
+# *** Placeholder settings ***
+
+# Please note that placeholders may not work in certain messages where it's impossible to find what it has to refer to.
+# For example, you can't use the lobby ID placeholder in a shop message.
+
+
+# Run placeholders
+
+# Shows the given run's name
 RunNamePlaceholder: '{runname}'
+# Shows the given run's point name
 RunPointsNamePlaceholder: '{runpointsname}'
+# Shows the points you get when you finish the given run
 RunPointsAmountPlaceholder: '{runpointsamount}'
 
 
+# Shop placeholders
+
+# Shows the price (the number of points) it costs to buy an item in shop
 ItemPricePlaceholder: '{price}'
+# Shows the set displayname of the current shop
 ShopNamePlaceholder: '{shopname}'
 
+
+# Lobby placeholders
+
+# Shows the number of 'members joined / max members' in a lobby
 MembersJoinedPlaceholder: '{membersjoined}'
+# Lists the name of the players who joined a lobby
 ActiveMembersNamesPlaceholder: '{playersinlobby}'
+# Shows the ID of the lobby, i.e '3'
 LobbyIDPlaceholder: '{lobbyid}'
+# Shows the leftover time of the given lobby in minutes
 LeftOverMinutesPlaceholder: '{leftovertime}'
 
 
 
+# *** Shop Options ***
 Shops:
   DemonRunShop:
     HookThisRun: 'DemonRun'
@@ -22,8 +49,12 @@ Shops:
     PriceLore:
       - '§r§c---------------------'
       - '§r§c{price} {runpointsname}s'
+  #AnotherRunShopName:
+  #AnotherRunShopName:
+  #AnotherRunShopName:
 
 
+# *** Run Options ***
 DemonRun:
   name: '§eDémon run'
   ThisRunPointsName: 'Démon Point'
@@ -40,6 +71,7 @@ DemonRun:
     - 'You get {runpointsamount} {runpointsname}s if you finish this run'
   PlayTimeInMinutes: 20
   BossBarTitle: '{runname} - You have {leftovertime} mins left'
+  #The number of runs below and the NumberOfAvailableRuns above must be the same.
   RunProcessInformation:
     1:
       level_0:
@@ -141,23 +173,42 @@ DemonRun:
         TeleportToLocation: '200 6 200'
         FinalLevel: true
 
+#AnotherRunName:
+#AnotherRunName:
+#AnotherRunName:
+
+
+# *** Message Settings ***
+
+# Comments are used to show which placeholders can work
+
+# Both run and lobby placeholders
 LobbyFullMsg: 'This lobby is full. Please wait for it to finish.'
 RunStartMsg: 'The lobby is full! The run starts in 10 seconds.'
 PassedLevelMsg: 'You handed the key over. Your team is being teleported to the next level.'
 RunFinishMsg: 'You successfully defeated the final boss and completed the run. You earned {runpointsamount} {runpointsname}s.'
+# When someone tries to use any form of teleport during run, even if the player is an OP
 CanNotLeaveMsg: 'Sorry, but you cannot leave your group while you are in a run. Please, finish the run first.'
 BackInGameMsg: 'You came back and the run is still on, you got teleported to the last checkpoint.'
 CouldNotFinishInTimeMsg: "You didn't finish the game in time. You have been teleported out."
 AllPlayersDeadMsg: 'All players in the run have died. The run is over.'
+
+# Shop and run placeholders
+# Admin command related feedbacks:
 MobrunShopAddCommandSuccessMsg: 'You successfully copied the data of the item in your hand to {shopname} §rwith the price set to {price}§r.'
 
 CanNotOpenShopGUImsg: "Sorry, but you can't shop here yet."
 ShopNotEnoughPointsMsg: "You don't have enough points to buy this item."
 ShopBoughtSuccessfullyMsg: 'You successfully bought this item.'
+
+# No placeholders can be used
+# The players get these messages when they were in a run, but a server shutdown occurred and the run finished automatically, and on next join they are at the run's starting NPC.
 AfterShutDown1Msg: 'The server has been down, therefore the run is over. You lost your progress.'
 AfterShutDown2Msg: "If the shutdown wasn't planned and broadcasted in time, contact the admins. Otherwise, we can't do anything. Sorry."
 
 CanNotOpenRunGUImsg: "Sorry, but you aren't allowed to play this run yet."
+
+# When someone uses the '/mobrun info' command:
 DisplayRunPointsMsg: 'You currently have the following amount of runpoints:'
 
 MobrunShopCreateCommandSuccessMsg: "You successfully created a shop in the config. Please go to the config file and edit it. Please note that this shop won't start working until the server is restarted."
