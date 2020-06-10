@@ -14,6 +14,7 @@ public class Level {
     private Location checkpoint;
     private String npcName;
     private String keyItem;
+    private String serverCommand;
     private Location initialTeleport;
     private Boolean isFinalLevel;
 
@@ -23,6 +24,7 @@ public class Level {
 
         this.npcName = config.getString(subRun.getRun().getId()+".RunProcessInformation."+subRun.getId()+"."+id+".NPCname");
         this.keyItem = config.getString(subRun.getRun().getId()+".RunProcessInformation."+subRun.getId()+"."+id+".KeyItemDisplayName");
+        this.serverCommand = config.getString(subRun.getRun().getId()+".RunProcessInformation."+subRun.getId()+"."+id+".ServerCommand");
         this.isFinalLevel = config.getBoolean(subRun.getRun().getId()+".RunProcessInformation."+subRun.getId()+"."+id+".FinalLevel");
 
         String[] xyz = config.getString(subRun.getRun().getId()+".RunProcessInformation."+subRun.getId()+"."+id+".CheckPointLocation").split(" ");
@@ -63,4 +65,6 @@ public class Level {
     public Boolean getFinalLevel() {
         return isFinalLevel;
     }
+
+    public String getServerCommand() { return serverCommand; }
 }

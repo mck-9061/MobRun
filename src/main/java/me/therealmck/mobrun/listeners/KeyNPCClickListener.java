@@ -98,6 +98,7 @@ public class KeyNPCClickListener implements Listener {
                                     lobby.stopRunning();
                                 } else {
                                     lobby.increaseCurrentLevel();
+                                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), lobby.getCurrentLevel().getServerCommand());
                                     for (Player player : lobby.getPlayers()) {
                                         player.teleport(lobby.getCurrentLevel().getCheckpoint());
                                         player.sendMessage(utils.replaceRunAndLobbyPlaceholders(lang.getPassedLevel(), run, lobby));

@@ -77,6 +77,7 @@ DemonRun:
       level_0:
         WorldNameCheckPoint: 'DemonWorld1'
         CheckPointLocation: '235 64 -129'
+        ServerCommand: '/mm mobs spawn -s [mob_name]:<level> <amount> <world,x,y,z>'
         NPCname: 'Auror'
         KeyItemDisplayName: 'StoneKey'
         WorldNameTeleport: 'DemonWorld1'
@@ -85,6 +86,7 @@ DemonRun:
       level_1:
         WorldNameCheckPoint: 'DemonWorld1'
         CheckPointLocation: '266 50 -100'
+        ServerCommand: '/mm mobs spawn -s [mob_name]:<level> <amount> <world,x,y,z>'
         NPCname: 'Euror'
         KeyItemDisplayName: 'GoldKey'
         WorldNameTeleport: 'DemonWorld1'
@@ -93,6 +95,7 @@ DemonRun:
       level_3:
         WorldNameCheckPoint: 'DemonWorld1'
         CheckPointLocation: '290 55 -70'
+        ServerCommand: '/mm mobs spawn -s [mob_name]:<level> <amount> <world,x,y,z>'
         NPCname: 'Geuror'
         KeyItemDisplayName: 'DiamondKey'
         WorldNameTeleport: 'DemonWorld1'
@@ -101,6 +104,7 @@ DemonRun:
       level_4:
         WorldNameCheckPoint: 'DemonWorld1'
         CheckPointLocation: '310 55 -50'
+        ServerCommand: '/mm mobs spawn -s [mob_name]:<level> <amount> <world,x,y,z>'
         NPCname: 'Feuror'
         KeyItemDisplayName: 'EmeraldKey'
         WorldNameTeleport: 'StartWorld'
@@ -110,6 +114,7 @@ DemonRun:
       level_0:
         WorldNameCheckPoint: 'DemonWorld2'
         CheckPointLocation: '235 64 -129'
+        ServerCommand: '/mm mobs spawn -s [mob_name]:<level> <amount> <world,x,y,z>'
         NPCname: 'Auror'
         KeyItemDisplayName: 'StoneKey'
         WorldNameTeleport: 'DemonWorld2'
@@ -118,6 +123,7 @@ DemonRun:
       level_1:
         WorldNameCheckPoint: 'DemonWorld2'
         CheckPointLocation: '266 50 -100'
+        ServerCommand: '/mm mobs spawn -s [mob_name]:<level> <amount> <world,x,y,z>'
         NPCname: 'Euror'
         KeyItemDisplayName: 'GoldKey'
         WorldNameTeleport: 'DemonWorld2'
@@ -126,6 +132,7 @@ DemonRun:
       level_3:
         WorldNameCheckPoint: 'DemonWorld2'
         CheckPointLocation: '290 55 -70'
+        ServerCommand: '/mm mobs spawn -s [mob_name]:<level> <amount> <world,x,y,z>'
         NPCname: 'Geuror'
         KeyItemDisplayName: 'DiamondKey'
         WorldNameTeleport: 'DemonWorld2'
@@ -134,6 +141,7 @@ DemonRun:
       level_4:
         WorldNameCheckPoint: 'DemonWorld2'
         CheckPointLocation: '310 55 -50'
+        ServerCommand: '/mm mobs spawn -s [mob_name]:<level> <amount> <world,x,y,z>'
         NPCname: 'Feuror'
         KeyItemDisplayName: 'EmeraldKey'
         WorldNameTeleport: 'StartWorld'
@@ -143,6 +151,7 @@ DemonRun:
       level_0:
         WorldNameCheckPoint: 'DemonWorld3'
         CheckPointLocation: '235 64 -129'
+        ServerCommand: '/mm mobs spawn -s [mob_name]:<level> <amount> <world,x,y,z>'
         NPCname: 'Auror'
         KeyItemDisplayName: 'StoneKey'
         WorldNameTeleport: 'DemonWorld3'
@@ -151,6 +160,7 @@ DemonRun:
       level_1:
         WorldNameCheckPoint: 'DemonWorld3'
         CheckPointLocation: '266 50 -100'
+        ServerCommand: '/mm mobs spawn -s [mob_name]:<level> <amount> <world,x,y,z>'
         NPCname: 'Euror'
         KeyItemDisplayName: 'GoldKey'
         WorldNameTeleport: 'DemonWorld3'
@@ -159,6 +169,7 @@ DemonRun:
       level_3:
         WorldNameCheckPoint: 'DemonWorld3'
         CheckPointLocation: '290 55 -70'
+        ServerCommand: '/mm mobs spawn -s [mob_name]:<level> <amount> <world,x,y,z>'
         NPCname: 'Geuror'
         KeyItemDisplayName: 'DiamondKey'
         WorldNameTeleport: 'DemonWorld3'
@@ -167,6 +178,7 @@ DemonRun:
       level_4:
         WorldNameCheckPoint: 'DemonWorld3'
         CheckPointLocation: '310 55 -50'
+        ServerCommand: '/mm mobs spawn -s [mob_name]:<level> <amount> <world,x,y,z>'
         NPCname: 'Feuror'
         KeyItemDisplayName: 'EmeraldKey'
         WorldNameTeleport: 'StartWorld'
