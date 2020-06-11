@@ -18,11 +18,11 @@ public class Shop {
     private ConfigurationSection items;
 
     public Shop(String shopName) {
-        FileConfiguration config = Main.getMobrunConfig();
-        ConfigurationSection section = config.getConfigurationSection("Shops."+shopName);
+        FileConfiguration config = Main.getShopsConfig();
+        ConfigurationSection section = config.getConfigurationSection(shopName);
 
         this.id = shopName;
-        this.runHook = new Run(config, section.getString("HookThisRun"));
+        this.runHook = new Run(Main.getMobrunConfig(), section.getString("HookThisRun"));
         this.displayName = section.getString("DisplayName");
         this.npcName = section.getString("NPCname");
         this.permission = section.getString("ShopGUIopenPermission");
@@ -67,7 +67,7 @@ public class Shop {
         section.set("Item", item);
         section.set("Price", price);
 
-        Main.saveMobrunConfig();
+        Main.saveShopsConfig();
     }
 
     public String getId() { return id; }

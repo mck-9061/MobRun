@@ -61,6 +61,7 @@ public class JoinListener implements Listener {
         // TP Player to last checkpoint if they're in a lobby
         for (Run run : Main.activeRuns) {
             for (SubRun subRun : run.getAvailableRuns()) {
+                if (!subRun.getLobby().isRunning()) continue;
                 boolean shouldSwap = false;
                 Player swapFrom = null;
                 for (Player player : subRun.getLobby().getPlayers()) {
@@ -81,10 +82,10 @@ public class JoinListener implements Listener {
         }
 
         // TP Player to NPC if they defected
-        for (Player player : Main.defectors.keySet()) {
-            if (player.getUniqueId().equals(event.getPlayer().getUniqueId())) {
-                Bukkit.getScheduler().runTaskLater(Main.instance, () -> {event.getPlayer().teleport(Main.defectors.get(player));}, 10L);
-                Main.defectors.remove(player);
+        for (UUID uuid : Main.defectors.keySet()) {
+            if (uuid.equals(event.getPlayer().getUniqueId())) {
+                Bukkit.getScheduler().runTaskLater(Main.instance, () -> {event.getPlayer().teleport(Main.defectors.get(uuid));}, 10L);
+                Main.defectors.remove(uuid);
             }
         }
 

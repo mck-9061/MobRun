@@ -34,16 +34,30 @@ public class RunInventoryClickListener implements Listener {
                         return;
                     }
 
-                    // Remove player from lobby if they were previously in one
                     for (Run r : Main.activeRuns) {
                         for (SubRun s : r.getAvailableRuns()) {
-                            s.getLobby().removePlayer(p);
+                            if (s.getLobby().getPlayers().contains(p)) {
+                                p.sendMessage(utils.replaceRunAndLobbyPlaceholders(lang.getAlreadyInLobby(), r, s.getLobby()));
+                                return;
+                            }
                         }
                     }
 
                     lobby.addPlayer(p);
+                    p.sendMessage(utils.replaceRunAndLobbyPlaceholders(lang.getJoinedLobby(), run, lobby));
 
-                    if (lobby.getPlayers().size() == 5) {
+                    // Schedule timeout
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            if (!lobby.isRunning()) {
+                                lobby.removePlayer(p);
+                                p.sendMessage(utils.replaceRunAndLobbyPlaceholders(lang.getTimeout(), run, lobby));
+                            }
+                        }
+                    }.runTaskLater(Main.instance, 12000L);
+
+                    if (lobby.getPlayers().size() == Main.getMobrunConfig().getInt("AmountOfPlayers")) {
                         lobby.setRunning(true);
 
                         // Start run 10 seconds later

@@ -27,6 +27,7 @@ public class ShopInventoryClickListener implements Listener {
 
                 int index = event.getRawSlot()+1;
                 ItemStack toGive = shop.getItems().getItemStack(index+".Item");
+                if (toGive == null) return;
                 int price = shop.getItemPrice(toGive);
                 int balance = Main.getPlayerConfig().getInt(event.getWhoClicked().getUniqueId()+"."+shop.getRunHook().getPointsName());
 

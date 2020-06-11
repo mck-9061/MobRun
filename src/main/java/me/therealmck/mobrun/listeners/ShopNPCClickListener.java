@@ -32,9 +32,8 @@ public class ShopNPCClickListener implements Listener {
                     // Create shop GUI and open it for player
 
                     ConfigurationSection items = shop.getItems();
-                    int rowsNeeded = ((items.getKeys(false).size() % 9) + 1) * 9;
 
-                    Inventory gui = Bukkit.createInventory(event.getClicker(), rowsNeeded, shop.getDisplayName());
+                    Inventory gui = Bukkit.createInventory(event.getClicker(), 54, shop.getDisplayName());
                     int count = 0;
 
                     for (String key : items.getKeys(false)) {

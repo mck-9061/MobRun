@@ -45,7 +45,7 @@ public class DeathListener implements Listener {
                             for (Player p : subRun.getLobby().getPlayers()) {
                                 // Teleporting on main thread so bukkit doesn't shout at me
                                 Bukkit.getScheduler().runTask(Main.instance, () -> {
-                                    p.setGameMode(GameMode.SURVIVAL);
+                                    p.setGameMode(GameMode.ADVENTURE);
                                     p.teleport(npc.getStoredLocation());
                                 });
                                 p.sendMessage(utils.replaceRunAndLobbyPlaceholders(lang.getAllPlayersDead(), subRun.getRun(), subRun.getLobby()));

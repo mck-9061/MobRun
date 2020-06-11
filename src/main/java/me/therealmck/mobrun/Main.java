@@ -23,10 +23,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Main extends JavaPlugin {
     public static File mobrunFile;
@@ -35,8 +32,10 @@ public class Main extends JavaPlugin {
     public static FileConfiguration playerConfig;
     public static File dataFile;
     public static FileConfiguration dataConfig;
+    public static File shopsFile;
+    public static FileConfiguration shopsConfig;
     public static Plugin instance;
-    public static HashMap<Player, Location> defectors = new HashMap<>();
+    public static HashMap<UUID, Location> defectors = new HashMap<>();
 
     // These fields just store all active stuff, hence why it's a terrible idea to hot-reload
     public static List<Run> activeRuns = new ArrayList<>();
@@ -48,6 +47,7 @@ public class Main extends JavaPlugin {
         createMobrunConfig();
         createPlayerConfig();
         createDataConfig();
+        createShopsConfig();
         saveResource("configtemplate.yml", true);
 
         // Add all runs/shops etc. from config
@@ -58,15 +58,15 @@ public class Main extends JavaPlugin {
                 "Shops", "CanNotOpenRunGUImsg", "CanNotOpenShopGUImsg", "RunStartMsg", "PassedLevelMsg", "RunFinishMsg", "ShopNotEnoughPointsMsg",
                 "ShopBoughtSuccessfullyMsg", "DisplayRunPointsMsg", "CouldNotFinishInTimeMsg", "BackInGameMsg", "AfterShutDown1Msg", "AfterShutDown2Msg",
                 "CanNotLeaveMsg", "MobrunShopCreateCommandSuccessMsg", "MobrunShopCreateCommandFailureMsg", "MobrunShopAddCommandSuccessMsg",
-                "MobrunShopAddCommandFailureMsg", "LobbyFullMsg", "AllPlayersDeadMsg");
+                "MobrunShopAddCommandFailureMsg", "LobbyFullMsg", "AllPlayersDeadMsg", "AmountOfPlayers", "LobbyJoinMsg", "LobbyLeaveMsg", "TimeoutMsg",
+                "AlreadyInLobbyMsg");
 
         for (String key : mobrunConfig.getKeys(false)) {
             if (!sysKeys.contains(key)) activeRuns.add(new Run(mobrunConfig, key));
         }
 
         // Shops
-        ConfigurationSection shopSection = mobrunConfig.getConfigurationSection("Shops");
-        for (String key : shopSection.getKeys(false)) {
+        for (String key : shopsConfig.getKeys(false)) {
             activeShops.add(new Shop(key));
         }
 
@@ -176,6 +176,32 @@ public class Main extends JavaPlugin {
     public static void saveDataConfig() {
         try {
             dataConfig.save(dataFile);
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+
+    public static FileConfiguration getShopsConfig() {
+        return shopsConfig;
+    }
+
+    private void createShopsConfig() {
+        shopsFile = new File(getDataFolder(), "shops.yml");
+        if (!shopsFile.exists()) {
+            shopsFile.getParentFile().mkdirs();
+            saveResource("shops.yml", false);
+        }
+
+        shopsConfig = new YamlConfiguration();
+        try {
+            shopsConfig.load(shopsFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveShopsConfig() {
+        try {
+            shopsConfig.save(shopsFile);
         } catch (Exception e) {e.printStackTrace();}
     }
 }

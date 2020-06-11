@@ -24,6 +24,10 @@ public class MessageHelper {
     private String addItemToShopSuccess;
     private String addItemToShopInvalid;
     private String allPlayersDead;
+    private String joinedLobby;
+    private String leftLobby;
+    private String timeout;
+    private String alreadyInLobby;
 
     public MessageHelper(FileConfiguration config) {
         this.config = config;
@@ -47,6 +51,10 @@ public class MessageHelper {
         this.addItemToShopSuccess = config.getString("MobrunShopAddCommandSuccessMsg");
         this.addItemToShopInvalid = config.getString("MobrunShopAddCommandFailureMsg");
         this.allPlayersDead = config.getString("AllPlayersDeadMsg");
+        this.leftLobby = config.getString("LobbyLeaveMsg");
+        this.joinedLobby = config.getString("LobbyJoinMsg");
+        this.timeout = config.getString("TimeoutMsg");
+        this.alreadyInLobby = config.getString("AlreadyInLobbyMsg");
     }
 
     public String getCannotOpenRunGui() {
@@ -120,4 +128,18 @@ public class MessageHelper {
     public String getLobbyFull() { return lobbyFullMsg; }
 
     public String getAllPlayersDead() { return allPlayersDead; }
+
+    public String getJoinedLobby() {
+        return joinedLobby;
+    }
+
+    public String getLeftLobby() {
+        return leftLobby;
+    }
+
+    public String getTimeout() {
+        return timeout;
+    }
+
+    public String getAlreadyInLobby() { return alreadyInLobby; }
 }

@@ -29,9 +29,8 @@ public class RunNPCClickListener implements Listener {
             if (name.equals(run.getNpcName())) {
                 if (event.getClicker().hasPermission(run.getOpenPermission())) {
                     List<SubRun> subRuns = run.getAvailableRuns();
-                    int rowsNeeded = ((subRuns.size() % 9) + 1) * 9;
 
-                    Inventory gui = Bukkit.createInventory(event.getClicker(), rowsNeeded, run.getName());
+                    Inventory gui = Bukkit.createInventory(event.getClicker(), 54, run.getName());
 
                     int count = 0;
 

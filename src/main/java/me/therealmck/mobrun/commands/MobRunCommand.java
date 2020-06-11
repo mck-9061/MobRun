@@ -3,6 +3,7 @@ package me.therealmck.mobrun.commands;
 import me.therealmck.mobrun.Main;
 import me.therealmck.mobrun.stuff.Run;
 import me.therealmck.mobrun.stuff.Shop;
+import me.therealmck.mobrun.stuff.SubRun;
 import me.therealmck.mobrun.utils.MessageHelper;
 import me.therealmck.mobrun.utils.Utils;
 import org.bukkit.command.Command;
@@ -37,14 +38,14 @@ public class MobRunCommand implements CommandExecutor {
                                     return true;
                                 }
                             }
-                            ConfigurationSection section = Main.getMobrunConfig().createSection("Shops."+args[2]);
+                            ConfigurationSection section = Main.getShopsConfig().createSection(args[2]);
                             section.set("HookThisRun", "Not set");
                             section.set("DisplayName", "Not set");
                             section.set("NPCname", "Not set");
                             section.set("ShopGUIopenPermission", "Not set");
                             section.set("PriceLore", Arrays.asList("§r§c---------------------", "§r§c{price} {runpointsname}s"));
                             section.createSection("Items");
-                            Main.saveMobrunConfig();
+                            Main.saveShopsConfig();
 
                             commandSender.sendMessage(lang.getCreateShopSuccess());
 
@@ -63,6 +64,7 @@ public class MobRunCommand implements CommandExecutor {
                                     if (shop == null) {
                                         commandSender.sendMessage("That shop doesn't exist.");
                                     } else {
+                                        item = item.clone();
                                         shop.addItem(item, Integer.valueOf(args[3]));
                                         commandSender.sendMessage(utils.replaceShopPlaceholders(lang.getAddItemToShopSuccess(), shop, Main.getMobrunConfig(), item));
                                     }
@@ -89,6 +91,19 @@ public class MobRunCommand implements CommandExecutor {
                     }
                 } else {
                     commandSender.sendMessage("Only a player can use this command.");
+                }
+            } else if (args[0].equals("leave")) {
+                for (Run run : Main.activeRuns) {
+                    for (SubRun subRun : run.getAvailableRuns()) {
+                        if (subRun.getLobby().getPlayers().contains((Player) commandSender)) {
+                            if (!subRun.getLobby().isRunning()) {
+                                subRun.getLobby().removePlayer((Player) commandSender);
+                                commandSender.sendMessage(utils.replaceRunAndLobbyPlaceholders(lang.getLeftLobby(), run, subRun.getLobby()));
+                            } else {
+                                commandSender.sendMessage(utils.replaceRunAndLobbyPlaceholders(lang.getCannotLeave(), run, subRun.getLobby()));
+                            }
+                        }
+                    }
                 }
             } else {
                 commandSender.sendMessage("Invalid command.");

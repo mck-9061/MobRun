@@ -11,6 +11,7 @@ import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -79,6 +80,7 @@ public class KeyNPCClickListener implements Listener {
                                                 // Teleporting on main thread so bukkit doesn't shout at me
                                                 Bukkit.getScheduler().runTask(Main.instance, () -> {
                                                     pl.teleport(npc.getStoredLocation());
+                                                    pl.setGameMode(GameMode.ADVENTURE);
                                                 });
                                                 pl.sendMessage(utils.replaceRunAndLobbyPlaceholders(lang.getRunFinish(), run, lobby));
 
@@ -89,7 +91,7 @@ public class KeyNPCClickListener implements Listener {
                                                     Main.getPlayerConfig().set(pl.getUniqueId() + "." + run.getPointsName(), currentPoints);
                                                     Main.savePlayerConfig();
                                                 } else {
-                                                    Main.defectors.put(pl, npc.getStoredLocation());
+                                                    Main.defectors.put(pl.getUniqueId(), npc.getStoredLocation());
                                                 }
                                             }
                                         }
@@ -101,6 +103,7 @@ public class KeyNPCClickListener implements Listener {
                                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(), lobby.getCurrentLevel().getServerCommand());
                                     for (Player player : lobby.getPlayers()) {
                                         player.teleport(lobby.getCurrentLevel().getCheckpoint());
+                                        player.setGameMode(GameMode.ADVENTURE);
                                         player.sendMessage(utils.replaceRunAndLobbyPlaceholders(lang.getPassedLevel(), run, lobby));
                                     }
                                 }

@@ -11,18 +11,7 @@ ActiveMembersNamesPlaceholder: '{playersinlobby}'
 LobbyIDPlaceholder: '{lobbyid}'
 LeftOverMinutesPlaceholder: '{leftovertime}'
 
-
-
-Shops:
-  DemonRunShop:
-    HookThisRun: 'DemonRun'
-    DisplayName: '§cDémon run shop'
-    NPCname: 'Gandolor'
-    ShopGUIopenPermission: 'demonrun.canshop'
-    PriceLore:
-      - '§r§c---------------------'
-      - '§r§c{price} {runpointsname}s'
-
+AmountOfPlayers: 5
 
 DemonRun:
   name: '§eDémon run'
@@ -162,6 +151,10 @@ BackInGameMsg: 'You came back and the run is still on, you got teleported to the
 CouldNotFinishInTimeMsg: "You didn't finish the game in time. You have been teleported out."
 AllPlayersDeadMsg: 'All players in the run have died. The run is over.'
 MobrunShopAddCommandSuccessMsg: 'You successfully copied the data of the item in your hand to {shopname} §rwith the price set to {price}§r.'
+LobbyJoinMsg: 'You joined the lobby!'
+LobbyLeaveMsg: 'You left the lobby.'
+TimeoutMsg: 'You timed out of the lobby!'
+AlreadyInLobbyMsg: "You're already in a lobby!"
 
 CanNotOpenShopGUImsg: "Sorry, but you can't shop here yet."
 ShopNotEnoughPointsMsg: "You don't have enough points to buy this item."
