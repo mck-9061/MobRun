@@ -70,6 +70,7 @@ public class RunInventoryClickListener implements Listener {
                                 for (Player player : lobby.getPlayers()) {
                                     player.teleport(lobby.getCurrentLevel().getCheckpoint());
                                 }
+                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), lobby.getCurrentLevel().getServerCommand());
                             }
                         }.runTaskLater(Main.instance, 200L);
                     }

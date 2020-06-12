@@ -9,6 +9,7 @@ import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -28,7 +29,7 @@ public class DeathListener implements Listener {
                         foundPlayer = true;
                         event.setKeepInventory(true);
                         event.setKeepLevel(true);
-                        event.getEntity().setHealth(20);
+                        event.getEntity().setHealth(event.getEntity().getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
                         event.getEntity().setGameMode(GameMode.SPECTATOR);
                     }
                 }

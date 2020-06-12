@@ -91,12 +91,8 @@ public class Main extends JavaPlugin {
         for (Run run : activeRuns) {
             for (SubRun subRun : run.getAvailableRuns()) {
                 for (Player p : subRun.getLobby().getPlayers()) {
-                    for (NPC npc : CitizensAPI.getNPCRegistry()) {
-                        if (npc.getName().equals(run.getNpcName())) {
-                            dataConfig.set(p.getUniqueId()+".npc", npc.getName());
-                            saveDataConfig();
-                        }
-                    }
+                    dataConfig.set(p.getUniqueId()+".run", run.getId());
+                    saveDataConfig();
                 }
             }
         }

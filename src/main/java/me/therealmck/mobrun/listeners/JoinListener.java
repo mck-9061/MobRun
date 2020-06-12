@@ -7,6 +7,7 @@ import me.therealmck.mobrun.utils.MessageHelper;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -43,9 +44,10 @@ public class JoinListener implements Listener {
                     MessageHelper lang = new MessageHelper(Main.getMobrunConfig());
                     if (key.equals(event.getPlayer().getUniqueId().toString())) {
                         Player p = event.getPlayer();
-                        for (NPC npc : CitizensAPI.getNPCRegistry()) {
-                            if (npc.getName().equals(Main.getDataConfig().get(key + ".npc"))) {
-                                p.teleport(npc.getEntity().getLocation());
+                        for (Run run : Main.activeRuns) {
+                            if (run.getId().equals(Main.getDataConfig().get(key+".run"))) {
+                                p.teleport(run.getAvailableRuns().get(0).getLevels().get(run.getAvailableRuns().get(0).getLevels().size()-1).getInitialTeleport());
+                                p.setGameMode(GameMode.ADVENTURE);
                                 p.sendMessage(lang.getAfterShutDown1());
                                 p.sendMessage(lang.getAfterShutDown2());
                             }
@@ -84,10 +86,12 @@ public class JoinListener implements Listener {
         // TP Player to NPC if they defected
         for (UUID uuid : Main.defectors.keySet()) {
             if (uuid.equals(event.getPlayer().getUniqueId())) {
-                Bukkit.getScheduler().runTaskLater(Main.instance, () -> {event.getPlayer().teleport(Main.defectors.get(uuid));}, 10L);
-                Main.defectors.remove(uuid);
+                Bukkit.getScheduler().runTaskLater(Main.instance, () -> {
+                    event.getPlayer().teleport(Main.defectors.get(uuid));
+                    Main.defectors.remove(uuid);
+                }, 10L);
+                Bukkit.getPlayer(uuid).setGameMode(GameMode.ADVENTURE);
             }
         }
-
     }
 }
